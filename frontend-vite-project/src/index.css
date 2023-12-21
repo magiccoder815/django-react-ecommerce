@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@layer base
+{
+    body{
+        @apply font-poppins
+    }
+    h1, h2, h3, h4, h5, h6{
+        @apply font-roboto
+    }
+}
+@layer components
+{
+    .size-selector input:checked + label{
+        @apply bg-primary text-white
+    }
+    .color-selector input:checked + label{
+        @apply ring-2 ring-primary
+    }
+    .input-box{
+        @apply w-full border-gray-400 px-4 py-3 text-gray-900 text-sm border rounded focus:ring-0 focus:border-primary placeholder-gray-500
+    }
+}

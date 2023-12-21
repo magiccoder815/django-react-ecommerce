@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
@@ -108,14 +109,27 @@ function Header() {
 
                 <div className="flex items-center flex-grow pl-16 justify-between">
                     <div className="flex items-center space-x-7 text-base">
-                        <a className="text-white font-semibold hover:text-gray-200 transition" href="index.html"> <i className="fa-solid fa-house"></i> Home</a>
-                        <a className="text-white font-semibold hover:text-gray-200 transition" href="shop.html"> <i className="fa-solid fa-bag-shopping"></i> Shop</a>
-                        <a className="text-white font-semibold hover:text-gray-200 transition" href="#"> <i className="fa-solid fa-address-card"></i> About</a>
-                        <a className="text-white font-semibold hover:text-gray-200 transition" href="#"> <i className="fa-solid fa-phone"></i> Contact</a>
+                        <Link to='/'>
+                        <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-house"></i> Home</a>
+                        </Link>
+                        <Link to='/shop'>
+                        <a className="text-white font-semibold hover:text-gray-200 transition"> <i className="fa-solid fa-bag-shopping"></i> Shop</a>
+                        </Link>
+                        <Link to='/about'>
+                        <a className="text-white font-semibold hover:text-gray-200 transition"> <i className="fa-solid fa-address-card"></i> About</a>
+                        </Link>
+
+                        <Link to='/contact'>
+                        <a className="text-white font-semibold hover:text-gray-200 transition"> <i className="fa-solid fa-phone"></i> Contact</a>
+                        </Link>
                     </div>
                     <div className="space-x-4">
-                    <a className="text-white font-semibold hover:text-gray-200 transition" href="login.html"> <i className="fa-solid fa-user"></i> Login</a>
-                    <a className="text-white font-semibold hover:text-gray-200 transition" href="login.html"> <i className="fa-solid fa-user-plus"></i>  Register</a>
+                    <Link to='/auth/login'>
+                    <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Login</a>
+                    </Link>
+                    <Link to='/auth/register'>
+                    <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user-plus"></i>  Register</a>
+                    </Link>
                 </div>
                 </div>
 
