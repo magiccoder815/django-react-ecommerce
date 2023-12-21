@@ -9,8 +9,17 @@ function App() {
   return (
     <>
       <div>
-      <h1 className="text-3xl font-bold underline bg-red-500">
+      <h1 className="bg-three font-poppins">
       Hello world!
+   
+    </h1>
+    <h1 className="bg-three ">
+      Hello world!
+   
+    </h1>
+    <h1 className="bg-three font-roboto">
+      Hello world!
+   
     </h1>
       </div>
     </>
