@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -6,12 +6,49 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import anime from 'animejs/lib/anime.es.js';
+
 
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 
+
+
 function Slider() {
+
+    
+useEffect(()=>{
+    const animateImage= ()=>{
+      anime({
+        targets: '.sliderchild',
+        translateX:  ['0%', '25%'],
+        translateY:  ['5%', '15%'],
+        duration: 4000,
+        easing:'linear',
+        direction: 'alternate',
+        loop:true,
+      });
+    };
+    animateImage();
+
+  },[]);
+
+  useEffect(()=>{
+    const animateImage2= ()=>{
+      anime({
+        targets: '.sliderbg',
+        scale:  [1, 1.3],
+        duration: 8000,
+        easing:'linear',
+        direction: 'alternate',
+        loop:true,
+      });
+    };
+    animateImage2();
+
+  },[]);
+
   return (
     <div>
  <Swiper
@@ -28,7 +65,7 @@ function Slider() {
         <SwiperSlide>
          
          <section className='relative h-full overflow-hidden'>
-            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center' style={{backgroundImage:'url("img/slider/1.jpg")'}}>
+            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center sliderbg' style={{backgroundImage:'url("img/slider/1.jpg")'}}>
             </div>
             <div className='absolute top-0 left-0 w-full h-full bg-opacity-20 bg-black'></div>
             <div className='flex flex-col lg:flex-row justify-between items-center py-1 px-20 relative z-10'>
@@ -40,7 +77,7 @@ function Slider() {
 
                 </div>
                 <div className='lg:w-1/2'>
-                    <img src='img/slider/1.png' className='w-full h-auto' />
+                    <img src='img/slider/1.png' className='w-full h-auto sliderchild' />
                 </div>
 
 
@@ -57,7 +94,7 @@ function Slider() {
         <SwiperSlide>
          
          <section className='relative h-full overflow-hidden'>
-            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center' style={{backgroundImage:'url("img/slider/2.jpg")'}}>
+            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center sliderbg' style={{backgroundImage:'url("img/slider/2.jpg")'}}>
             </div>
             <div className='absolute top-0 left-0 w-full h-full bg-opacity-20 bg-black'></div>
             <div className='flex flex-col lg:flex-row justify-between items-center py-1 px-20 relative z-10'>
@@ -69,7 +106,7 @@ function Slider() {
 
                 </div>
                 <div className='lg:w-1/2'>
-                    <img src='img/slider/2.png' className='w-full h-auto' />
+                    <img src='img/slider/2.png' className='w-full h-auto sliderchild' />
                 </div>
 
 
@@ -86,7 +123,7 @@ function Slider() {
         <SwiperSlide>
          
          <section className='relative h-full overflow-hidden'>
-            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center' style={{backgroundImage:'url("img/slider/3.jpg")'}}>
+            <div className='absolute top-0 left-0 w-full h-full bg-cover bg-center sliderbg' style={{backgroundImage:'url("img/slider/3.jpg")'}}>
             </div>
             <div className='absolute top-0 left-0 w-full h-full bg-opacity-20 bg-black'></div>
             <div className='flex flex-col lg:flex-row justify-between items-center py-1 px-20 relative z-10'>
@@ -98,7 +135,7 @@ function Slider() {
 
                 </div>
                 <div className='lg:w-1/2'>
-                    <img src='img/slider/3.png' className='w-full h-auto' />
+                    <img src='img/slider/3.png' className='w-full h-auto sliderchild' />
                 </div>
 
 
