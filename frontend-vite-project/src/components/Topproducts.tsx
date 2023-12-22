@@ -12,13 +12,11 @@ import { Pagination } from 'swiper/modules';
 
 function Topproducts() {
   return (
-    <div className='pt-8 pb-16'>
+    <div className='pt-8 pb-8 px-20 bg-slate-200'>
           <Swiper
         slidesPerView={1}
         spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
+     
         breakpoints={{
           640: {
             slidesPerView: 2,

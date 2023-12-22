@@ -22,7 +22,7 @@ function HomeScreen() {
 
 
 
-<div class="container pb-16 pt-8">
+<div class="container pb-16 pt-8 text-center">
 <h2 class="text-2xl md:text-3xl font-medium uppercase font-poppins mb-6 text-gray-800" >Shop by Category</h2>
 
 <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-3">
@@ -80,7 +80,7 @@ function HomeScreen() {
 
 </div>
 
-       <div class="container pb-16  hidden lg:block">
+       <div class=" pb-16  hidden lg:block">
         <a href="#">
 
             <img src="img/offer.jpg" class="w-full" />
