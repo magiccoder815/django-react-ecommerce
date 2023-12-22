@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import AboutScreen from './screens/AboutScreen';
 import Login from './screens/auth/Login';
 import Register from './screens/auth/Register';
+import ShopScreen from './screens/ShopScreen';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
         <Route path="/about" element={<AboutScreen/>} /> 
         <Route path="/auth/login" element={<Login/>} /> 
         <Route path="/auth/register" element={<Register/>} /> 
+        <Route path="/shop" element={<ShopScreen/>} /> 
       </Routes>
       <Footer/>
     </BrowserRouter>
