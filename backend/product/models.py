@@ -1,6 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
 from product.valid import valid_image_extension
+from cloudinary.models import CloudinaryField
 
 def category_image_path(instance, filename):
     return f"category/{instance.id}/server/{filename}"
@@ -49,5 +50,11 @@ class Product(models.Model):
     size = models.CharField(max_length=2, choices=SIZE_CHOICES)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    image = CloudinaryField('image')
+    image2 = CloudinaryField('image2')
+    image3 = CloudinaryField('image3')
+
+
+
     def __str__(self):
         return self.title

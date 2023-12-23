@@ -3,6 +3,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -117,3 +118,10 @@ MEDIA_URL ="media/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+          
+cloudinary.config( 
+  cloud_name = "dnmvkq8sl", 
+  api_key = "818954278932433", 
+  api_secret = "pEOcHi7R8PT8P8f6r4ISf7ZHMqc" 
+)
