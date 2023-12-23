@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
+from product.valid import valid_image_extension
 
 def category_image_path(instance, filename):
     return f"category/{instance.id}/server/{filename}"
@@ -11,6 +12,7 @@ class Category(models.Model):
         upload_to = category_image_path,
         null=True,
         blank=True,
+        validators={valid_image_extension}
          
     )
     menuicon=models.CharField(max_length=200,

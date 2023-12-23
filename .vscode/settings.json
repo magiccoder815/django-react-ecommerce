@@ -1,0 +1,7 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "git.detectSubmodules": true,
+    "outline.showModules": true
+}
