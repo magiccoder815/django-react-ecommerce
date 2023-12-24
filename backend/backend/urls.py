@@ -5,12 +5,15 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 from product.views import CategoryViewSet, BrandViewSet, ProductViewSet
+from sitesettings.views import SocialMediaViewSet, SliderViewSet
 
 
 router = routers.DefaultRouter()
 router.register('api/category/select', CategoryViewSet)
 router.register('api/brand/select', BrandViewSet)
 router.register('api/product/select', ProductViewSet)
+router.register('api/slider/select', SliderViewSet)
+router.register('api/socialmedia/select', SocialMediaViewSet)
 
 
 urlpatterns = [
