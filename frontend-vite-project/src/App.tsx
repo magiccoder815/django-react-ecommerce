@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <div>
-        <Provider store={store}></Provider>
+        <Provider store={store}>
       <BrowserRouter>
       <Header/>
       <Routes>
@@ -32,6 +32,8 @@ function App() {
       </Routes>
       <Footer/>
     </BrowserRouter>
+
+    </Provider>
     
       </div>
     </>

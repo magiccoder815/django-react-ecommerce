@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slider from '../components/Slider'
 import Topproducts from '../components/Topproducts'
+import { useDispatch } from 'react-redux'
+import { useAppSelector } from '../store';
+import { categoriesFail, categoriesRequest, categoriesSuccess } from '../hooks/actions/ProductAction';
+import { BASE_URL } from '../configUrl';
 
 function HomeScreen() {
+
+    const dispatch = useDispatch();
+    const {categories, error ,loading} =useAppSelector((state)=>state.categories);
+
+    useEffect(()=>{
+        dispatch(categoriesRequest());
+
+        fetch(BASE_URL+"/category/select/")
+            .then((response)=>response.json())
+            .then((data)=>dispatch(categoriesSuccess(data)))
+            .catch((error)=>dispatch(categoriesFail(error)))
+            .finally(()=>dispatch(categoriesRequest()));
+
+
+    },[dispatch]);
+
+  
+
   return (
     <div><Slider></Slider>
 
@@ -11,9 +33,37 @@ function HomeScreen() {
     </div>
 
 
-    
+    <h1>Categories</h1>
+
+    {loading &&(
+
+            <div>
+                <p>Loading........</p>
+            </div>
+     
+    ) }
+
+            {error &&(
+
+            <div>
+                <p>{error.message}</p>
+            </div>
+
+            ) }
+
+ 
+
+<ul>
+    {categories.map((category)=>{
+        <li key={category.id}>
+            {category.title}
+
+        </li>
 
 
+    })}
+
+</ul>
 
 
 <Topproducts></Topproducts>
