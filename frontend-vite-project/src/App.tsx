@@ -11,6 +11,8 @@ import AboutScreen from './screens/AboutScreen';
 import Login from './screens/auth/Login';
 import Register from './screens/auth/Register';
 import ShopScreen from './screens/ShopScreen';
+import { Provider } from 'react-redux';
+import store from './store';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +20,7 @@ function App() {
   return (
     <>
       <div>
+        <Provider store={store}></Provider>
       <BrowserRouter>
       <Header/>
       <Routes>
