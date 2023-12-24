@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework import  serializers, viewsets
 from .models import Category, Brand , Product
 from rest_framework.response import  Response
-from .serializer import CategorySerializer
+from .serializer import CategorySerializer, BrandSerializer
 from .schema import category_doc
 
 
@@ -24,5 +24,19 @@ class CategoryViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
  
+ 
+class BrandViewSet(viewsets.ModelViewSet):
+   
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+    http_method_names=['get']
+
+    def list(self, request):
+        slug = request.query_params.get("slug")
+        if slug:
+            self.queryset = self.queryset.filter(slug=slug)
+        
+        serializer = self.get_serializer(self.queryset, many=True)
+        return Response(serializer.data)
 
 

@@ -4,12 +4,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
-from product.views import CategoryViewSet
+from product.views import CategoryViewSet, BrandViewSet
 
 
 router = routers.DefaultRouter()
 router.register('api/category/select', CategoryViewSet)
-
+router.register('api/brand/select', BrandViewSet)
 
 
 urlpatterns = [
