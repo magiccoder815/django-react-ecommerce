@@ -3,7 +3,7 @@ import Slider from '../components/Slider'
 import Topproducts from '../components/Topproducts'
 import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../store';
-import { categoriesFail, categoriesRequest, categoriesSuccess } from '../hooks/actions/ProductAction';
+import { categoriesFail, categoriesRequest, categoriesSuccess, getCategories } from '../hooks/actions/ProductAction';
 import { BASE_URL } from '../configUrl';
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -14,15 +14,7 @@ function HomeScreen() {
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
 
     useEffect(()=>{
-        dispatch(categoriesRequest());
-
-        fetch(BASE_URL+"/category/select/")
-            .then((response)=>response.json())
-            .then((data)=>dispatch(categoriesSuccess(data)))
-            .catch((error)=>dispatch(categoriesFail(error)))
-            .finally(()=>dispatch(categoriesRequest()));
-
-
+        dispatch(getCategories());
     },[dispatch]);
 
   
@@ -35,22 +27,13 @@ function HomeScreen() {
     </div>
 
 
-    <h1>Categories</h1>
 
-    {loading && <LoadingSpinner/>}
-    {error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+  
 
  
 
 <ul>
-    {categories.map((category)=>{
-        <li key={category.id}>
-            {category.title}
 
-        </li>
-
-
-    })}
 
 </ul>
 
@@ -66,53 +49,29 @@ function HomeScreen() {
 
 <div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-3">
 
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/1.jpg" class="w-full"/>
+
+{loading && <LoadingSpinner/>}
+{error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{categories.map((category)=>(
+     
+         
+
+            <div key={category.id} class="overflow-hidden relative group rounded-xl">
+        <img src={category.photo} class="w-full"/>
         <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Shoes</a>
+         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition"> {category.title}</a>
 
 
     </div>
 
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/2.jpg" class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Dress</a>
+    
 
 
-    </div>
 
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/3.jpg" class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Watch</a>
+    ))}
 
+  
 
-    </div>
-
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/4.jpg" class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Computer</a>
-
-
-    </div>
-
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/5.jpg" class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Mobile Phone</a>
-
-
-    </div>
-
-    <div class="overflow-hidden relative group rounded-xl">
-        <img src="img/category/6.jpg" class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
-         text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition">Sport</a>
-
-
-    </div>
 
 
 </div>

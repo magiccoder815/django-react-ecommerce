@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ErrorMessage from '../components/ErrorMessage';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store';
+import { getCategories } from '../hooks/actions/ProductAction';
+
 
 function Header() {
+
+    const dispatch = useDispatch();
+    const {categories, error ,loading} =useAppSelector((state)=>state.categories);
+
+    useEffect(()=>{
+        dispatch(getCategories());
+    },[dispatch]);
+
   return (
     <div>
 
@@ -71,35 +85,24 @@ function Header() {
                              <div className="absolute left-0 top-full w-full bg-white shadow-xl py-3 opacity-0 
                              invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50
                              divide-y divide-gray-500 divide-dashed">
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-shoe-prints"></i>
-                               <span className="ml-6 text-gray-500 text-sm font-semibold">Shoes</span> 
-                             </a>
 
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-clock"></i>
-                               <span className="ml-6 text-gray-500 text-sm font-semibold">Watch</span> 
-                             </a>
+{loading && <LoadingSpinner/>}
+{error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{categories.map((category)=>(
+     
+         
 
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-person-dress"></i>
-                               <span className="ml-6 text-gray-500 text-sm font-semibold">Dress</span> 
-                             </a>
 
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-mobile-button"></i>
-                             <span className="ml-6 text-gray-500 text-sm font-semibold">Mobile Phone</span> 
-                             </a>
+     <a key={category.id} className="px-6 py-3 flex items-center hover:bg-gray-200 transition">
+     <i className={category.menuicon}></i>
+    <span className="ml-6 text-gray-500 text-sm font-semibold">{category.title}</span> 
+  </a>
 
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-computer"></i>
-                               <span className="ml-6 text-gray-500 text-sm font-semibold">Computer</span> 
-                             </a>
+         
 
-                             <a className="px-6 py-3 flex items-center hover:bg-gray-200 transition" href="#">
-                                <i className="fa-solid fa-bicycle"></i>
-                               <span className="ml-6 text-gray-500 text-sm font-semibold">Sport</span> 
-                             </a>
+    ))}
+
+
 
 
                              </div>
