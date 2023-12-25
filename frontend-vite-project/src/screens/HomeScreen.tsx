@@ -53,20 +53,12 @@ function HomeScreen() {
 {loading && <LoadingSpinner/>}
 {error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
 {categories.map((category)=>(
-     
-         
 
             <div key={category.id} class="overflow-hidden relative group rounded-xl">
         <img src={category.photo} class="w-full"/>
         <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
          text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition"> {category.title}</a>
-
-
     </div>
-
-    
-
-
 
     ))}
 

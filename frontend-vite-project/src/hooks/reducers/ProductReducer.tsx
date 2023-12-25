@@ -7,7 +7,7 @@ const initialState ={
     error:null,
 };
 
-const categoryReducer = (state = initialState, action )=>{
+export const categoryReducer = (state = initialState, action )=>{
     switch(action.type){
         case CATEGORIES_REQUEST:
             return{
@@ -30,5 +30,3 @@ const categoryReducer = (state = initialState, action )=>{
             return state;
     }
 }
-
-export default categoryReducer;
