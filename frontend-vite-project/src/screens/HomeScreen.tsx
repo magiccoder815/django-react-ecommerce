@@ -7,6 +7,7 @@ import { categoriesFail, categoriesRequest, categoriesSuccess, getCategories } f
 import { BASE_URL } from '../configUrl';
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Product from '../components/Product';
 
 function HomeScreen() {
 
@@ -39,7 +40,6 @@ function HomeScreen() {
 
 
 <Topproducts></Topproducts>
-
 
 
 
