@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../store';
 import { categoriesFail, categoriesRequest, categoriesSuccess } from '../hooks/actions/ProductAction';
 import { BASE_URL } from '../configUrl';
+import ErrorMessage from '../components/ErrorMessage';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function HomeScreen() {
 
@@ -35,21 +37,8 @@ function HomeScreen() {
 
     <h1>Categories</h1>
 
-    {loading &&(
-
-            <div>
-                <p>Loading........</p>
-            </div>
-     
-    ) }
-
-            {error &&(
-
-            <div>
-                <p>{error.message}</p>
-            </div>
-
-            ) }
+    {loading && <LoadingSpinner/>}
+    {error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
 
  
 
