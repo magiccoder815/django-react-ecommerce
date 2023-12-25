@@ -20,7 +20,7 @@ export const getCategories = () => async  (dispatch)=>{
 export const getProduct = () => async  (dispatch)=>{
     dispatch({type:'PRODUCT_REQUEST'});
     try{
-        const response = await axios.get(BASE_URL+"/category/select/");
+        const response = await axios.get(BASE_URL+"/product/select/");
         dispatch({type:'PRODUCT_SUCCESS', payload:response.data});
     }
     catch(error){

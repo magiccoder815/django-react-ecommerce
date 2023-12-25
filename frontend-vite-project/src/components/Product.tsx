@@ -1,13 +1,20 @@
 import React from 'react'
+import { CLOUD_URL } from '../configUrl';
 
-function Product() {
+const Product =({product})=> {
+
+    if(!product){
+        return <p>No Product</p>
+    }
+
+    const {title, price, discount, rating, image } = product;
   return (
     <div>
 
          
 <div class="group rounded-xl bg-white shadow-lg overflow-hidden">
     <div class="relative">
-            <img src="img/product/cp-1.png" class="w-full" />
+            <img src={CLOUD_URL+image} class="w-full" />
 
       <div class="absolute inset-0 flex items-center justify-center text-xl
             text-white font-roboto font-medium  opacity-0 bg-black bg-opacity-0  group-hover:opacity-100 group-hover:bg-opacity-30 transition">
@@ -27,20 +34,21 @@ function Product() {
       <div class="pt-4 pb-3 px-4">
 
         <a href="view.html">
-            <h4 class=" uppercase font-medium text-xl mb-2 text-gray-900 hover:text-primary transition">Computer One</h4> 
+            <h4 class=" uppercase font-medium text-xl mb-2 text-gray-900 hover:text-primary transition">{title}</h4> 
             
         </a>
 
 
         <div class="flex items-baseline mb-1 space-x-2">
-            <p class="text-xl text-primary font-roboto font-semibold"> $100.00</p>
-            <p class="text-sm text-gray-500 font-roboto line-through"> $150.00</p>
+            <p class="text-xl text-primary font-roboto font-semibold"> ${price}</p>
+            <p class="text-sm text-gray-500 font-roboto line-through"> ${discount}</p>
 
 
         </div>
 
         <div class="flex items-center">
             <div class="flex gap-1 text-sm text-yellow-500">
+            {rating}
                 <span><i class="fa-solid fa-star"></i></span>
                 <span><i class="fa-solid fa-star"></i></span>
                 <span><i class="fa-solid fa-star"></i></span>
@@ -49,7 +57,6 @@ function Product() {
 
 
             </div>
-            <div class="text-xs text-gray-500 ml-3">(120)</div>
 
 
 
