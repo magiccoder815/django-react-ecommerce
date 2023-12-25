@@ -1,5 +1,6 @@
 import React from 'react'
 import { CLOUD_URL } from '../configUrl';
+import StarRating from './StarRating';
 
 const Product =({product})=> {
 
@@ -47,17 +48,7 @@ const Product =({product})=> {
         </div>
 
         <div class="flex items-center">
-            <div class="flex gap-1 text-sm text-yellow-500">
-            {rating}
-                <span><i class="fa-solid fa-star"></i></span>
-                <span><i class="fa-solid fa-star"></i></span>
-                <span><i class="fa-solid fa-star"></i></span>
-                <span><i class="fa-solid fa-star"></i></span>
-                <span><i class="fa-solid fa-star"></i></span>
-
-
-            </div>
-
+          <StarRating rating={rating}></StarRating>
 
 
         </div>

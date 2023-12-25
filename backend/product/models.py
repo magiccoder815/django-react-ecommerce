@@ -2,7 +2,7 @@ from django.db import models
 from autoslug import AutoSlugField
 from product.valid import valid_image_extension
 from cloudinary.models import CloudinaryField
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 def category_image_path(instance, filename):
     return f"category/{instance.id}/server/{filename}"
 
@@ -38,7 +38,9 @@ class Product(models.Model):
     discount = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     available = models.BooleanField(default=True)
     is_top = models.BooleanField(default=False)
-    rating = models.FloatField(null=True, blank=True)
+    rating = models.FloatField(null=True, 
+                               validators=[MinValueValidator(1), MaxValueValidator(5)],
+                               blank=True )
     count_in_stock = models.PositiveIntegerField()
     SIZE_CHOICES = (
         ("xs", "XS"),
