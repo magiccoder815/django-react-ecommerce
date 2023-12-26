@@ -47,8 +47,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     def list(self, request):
 
         slug = request.query_params.get("slug")
-        category_id = request.query_params.get("category")
-        brand_id = request.query_params.get("brand")
+        categories = request.query_params.getlist("category")
+        brands = request.query_params.getlist("brand")
         min_price = request.query_params.get("min_price")
         max_price = request.query_params.get("max_price")
         avaible = request.query_params.get("avaible")
@@ -60,10 +60,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     
         if slug:
             self.queryset = self.queryset.filter(slug=slug)
-        if category_id:
-            self.queryset = self.queryset.filter(category=category_id)
-        if brand_id:
-            self.queryset = self.queryset.filter(brand=brand_id)
+        if categories:
+            self.queryset = self.queryset.filter(category__in=categories)
+        if brands:
+            self.queryset = self.queryset.filter(brand__in=brands)
         if min_price:
             self.queryset = self.queryset.filter(price__gte=min_price)
         if max_price:
