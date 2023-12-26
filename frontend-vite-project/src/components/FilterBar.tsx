@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import { getCategories, getbrands } from '../hooks/actions/ProductAction';
+import { useNavigate } from 'react-router-dom';
 
 function FilterBar() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+    const [selectedSize, setSelectedSize] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setmaxPrice] = useState('');
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
     const {brands, error:branderror ,brandloading} =useAppSelector((state)=>state.brands);
 
@@ -17,7 +24,32 @@ function FilterBar() {
         dispatch(getbrands());
     },[dispatch]);
 
+    const handleFilter =()=>{
+
+        const queryParams = new URLSearchParams();
+
+        if(selectedSize.length>0){
+            queryParams.append('size', selectedSize)
+        }
+        if(minPrice!==''){
+            queryParams.append('min_price',minPrice)
+        }
+        if(maxPrice!==''){
+            queryParams.append('max_price',maxPrice)
+        }
+       
+
+        navigate(`/shop?${queryParams.toString()}`)
+      
+
+    };
+
+    const handeSizeSelection =(selectedSize) =>{
+        setSelectedSize([selectedSize]);
+    };
+
   
+
 
 
 
@@ -88,9 +120,9 @@ function FilterBar() {
         <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Price</h3>
 
         <div className="mt-4 flex items-center">
-            <input className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
+            <input onChange={(e)=>setMinPrice(e.target.value)} className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
            <span className="mx-3 text-gray-600"> - </span>
-            <input className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
+            <input onChange={(e)=>setmaxPrice(e.target.value)}  className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
 
 
         </div>
@@ -103,47 +135,31 @@ function FilterBar() {
         <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Size</h3>
         <div className="flex items-center gap-2">
     
+     {sizes.map((size)=>(
+   <div key={size} className="size-selector">
+
+   <input 
+   type="radio"
+    name="size" 
+    className="hidden"
+    onChange={()=>handeSizeSelection(size)}
+    checked={selectedSize.includes(size)}
+     id={`size-${size.toLowerCase()}`}
+     />
+   <label htmlFor={`size-${size.toLowerCase()}`}className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
+   items-center justify-center cursor-pointer shadow-sm text-gray-900" >{size}</label>
+
+   </div>
+
+     ))}
+
+         
+
+
+      
        
-        <div className="size-selector">
 
-            <input type="radio" name="size" className="hidden" id="size-xs"/>
-            <label htmlFor="size-xs" className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-            items-center justify-center cursor-pointer shadow-sm text-gray-900" >XS</label>
-
-        </div>
-
-        <div className="size-selector">
-
-            <input type="radio" name="size" className="hidden" id="size-s"/>
-            <label htmlFor="size-s" className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-            items-center justify-center cursor-pointer shadow-sm text-gray-900" >S</label>
-
-        </div>
-
-        <div className="size-selector">
-
-            <input type="radio" name="size" className="hidden" id="size-m"/>
-            <label htmlFor="size-m" className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-            items-center justify-center cursor-pointer shadow-sm text-gray-900" >M</label>
-
-        </div>
-
-        <div className="size-selector">
-
-            <input type="radio" name="size" className="hidden" id="size-l"/>
-            <label htmlFor="size-l" className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-            items-center justify-center cursor-pointer shadow-sm text-gray-900" >L</label>
-
-        </div>
-
-
-        <div className="size-selector">
-
-            <input type="radio" name="size" className="hidden" id="size-xl"/>
-            <label htmlFor="size-xl" className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-            items-center justify-center cursor-pointer shadow-sm text-gray-900" >XL</label>
-
-        </div>
+       
 
     </div>
 
@@ -158,7 +174,9 @@ function FilterBar() {
     
        <div className="pt-4 relative">
        
-       <a href="view.html" class="block w-full py-2 text-center text-white bg-primary border
+       <a onClick={(e)=>{
+        e.preventDefault(); handleFilter();
+       }} class="block w-full py-2 text-center text-white bg-primary border
        border-primary rounded-xl font-medium hover:bg-transparent hover:text-primary">Filter</a>
 
 
