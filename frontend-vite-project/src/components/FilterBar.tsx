@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store';
+import LoadingSpinner from './LoadingSpinner';
+import ErrorMessage from './ErrorMessage';
+import { getCategories, getbrands } from '../hooks/actions/ProductAction';
 
 function FilterBar() {
+
+    const dispatch = useDispatch();
+    const {categories, error ,loading} =useAppSelector((state)=>state.categories);
+    const {brands, error:branderror ,brandloading} =useAppSelector((state)=>state.brands);
+
+
+    useEffect(()=>{
+        dispatch(getCategories());
+        dispatch(getbrands());
+    },[dispatch]);
+
+  
+
+
+
   return (
     <div>
          <div className="col-span-1 bg-gray-100 px-4 pb-6 shadow-xl rounded-md overflow-hidden w-96 md:absolute lg:static left-4 top-7 z-10 lg:w-full lg:block">
@@ -14,51 +34,22 @@ function FilterBar() {
         <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Categories</h3>
         <div className="space-y-2">
 
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Shoes</label>
-                <div className="ml-auto text-gray-600 text-sm">(10)</div>
-
-            </div>
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Watch</label>
-                <div className="ml-auto text-gray-600 text-sm">(50)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Sport</label>
-                <div className="ml-auto text-gray-600 text-sm">(3)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Dress</label>
-                <div className="ml-auto text-gray-600 text-sm">(100)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Computer</label>
-                <div className="ml-auto text-gray-600 text-sm">(2)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Mobile Phone</label>
-                <div className="ml-auto text-gray-600 text-sm">(2)</div>
-
-            </div>
-
-
-
             
+
+{loading && <LoadingSpinner/>}
+{error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{categories.map((category)=>(
+
+<div key={category.id} className="flex items-center mt-1">
+<input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
+<label className="ml-3 text-gray-950">{category.title}</label>
+<div className="ml-auto text-gray-600 text-sm">( {category.product_count} )</div>
+
+</div>
+
+    ))}
+
+
 
         </div>
 
@@ -71,51 +62,21 @@ function FilterBar() {
         <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Brand</h3>
         <div className="space-y-2">
 
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Apple</label>
-                <div className="ml-auto text-gray-600 text-sm">(10)</div>
-
-            </div>
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Zara</label>
-                <div className="ml-auto text-gray-600 text-sm">(50)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Dym</label>
-                <div className="ml-auto text-gray-600 text-sm">(3)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Success</label>
-                <div className="ml-auto text-gray-600 text-sm">(100)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950">Danger</label>
-                <div className="ml-auto text-gray-600 text-sm">(2)</div>
-
-            </div>
-
-            <div className="flex items-center mt-1">
-                <input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
-                <label className="ml-3 text-gray-950"> Phone</label>
-                <div className="ml-auto text-gray-600 text-sm">(2)</div>
-
-            </div>
-
-
-
             
+{brandloading && <LoadingSpinner/>}
+{branderror && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{brands.map((brand)=>(
+
+<div key={brand.id} className="flex items-center mt-1">
+<input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
+<label className="ml-3 text-gray-950">{brand.title}</label>
+<div className="ml-auto text-gray-600 text-sm">( {brand.product_count} )</div>
+
+</div>
+
+    ))}
+
+ 
 
         </div>
 
@@ -196,9 +157,9 @@ function FilterBar() {
 
     
        <div className="pt-4 relative">
-        <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Color</h3>
-     
-
+       
+       <a href="view.html" class="block w-full py-2 text-center text-white bg-primary border
+       border-primary rounded-xl font-medium hover:bg-transparent hover:text-primary">Filter</a>
 
 
 

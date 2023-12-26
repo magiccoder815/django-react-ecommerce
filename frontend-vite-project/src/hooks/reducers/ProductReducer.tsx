@@ -1,7 +1,8 @@
 import { 
     CATEGORIES_FAIL, CATEGORIES_REQUEST, CATEGORIES_SUCCESS,
     PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS,
-    TOP_PRODUCT_FAIL, TOP_PRODUCT_REQUEST, TOP_PRODUCT_SUCCESS
+    TOP_PRODUCT_FAIL, TOP_PRODUCT_REQUEST, TOP_PRODUCT_SUCCESS,
+    BRAND_FAIL, BRAND_REQUEST, BRAND_SUCCESS
 
 } from "../constans/Productconstans"
 
@@ -35,6 +36,38 @@ export const categoryReducer = (state = initialState, action )=>{
             return state;
     }
 }
+
+
+const initiaBrandlState ={
+    brands : [],
+    loading:false,
+    error:null,
+};
+
+export const brandReducer = (state = initiaBrandlState, action )=>{
+    switch(action.type){
+        case BRAND_REQUEST:
+            return{
+                ...state,
+                loading:true,
+            };
+        case BRAND_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                brands:action.payload,
+            };
+        case BRAND_FAIL:
+            return{
+                ...state,
+                loading:false,
+                error:action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
 
 
 const ProductinitialState ={

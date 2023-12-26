@@ -17,6 +17,17 @@ export const getCategories = () => async  (dispatch)=>{
     }
 };
 
+export const getbrands = () => async  (dispatch)=>{
+    dispatch({type:'BRAND_REQUEST'});
+    try{
+        const response = await axios.get(BASE_URL+"/brand/select/");
+        dispatch({type:'BRAND_SUCCESS', payload:response.data});
+    }
+    catch(error){
+        dispatch({type:'BRAND_FAIL', payload:error.message || "Error system" })
+    }
+};
+
 export const getProduct = () => async  (dispatch)=>{
     dispatch({type:'PRODUCT_REQUEST'});
     try{
