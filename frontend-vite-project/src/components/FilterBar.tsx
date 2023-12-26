@@ -15,6 +15,8 @@ function FilterBar() {
     const [selectedSize, setSelectedSize] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setmaxPrice] = useState('');
+    const [selectedCategories, setselectedCategories] = useState([]);
+    const [selectedBrand, setselectedBrand] = useState([]);
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
     const {brands, error:branderror ,brandloading} =useAppSelector((state)=>state.brands);
 
@@ -27,6 +29,19 @@ function FilterBar() {
     const handleFilter =()=>{
 
         const queryParams = new URLSearchParams();
+
+        if(selectedCategories.length>0){
+            selectedCategories.forEach(categoryId=>{
+                queryParams.append('category', categoryId)
+            })
+        }
+
+        if(selectedBrand.length>0){
+            selectedBrand.forEach(brandId=>{
+                queryParams.append('brand', brandId)
+            })
+        }
+
 
         if(selectedSize.length>0){
             queryParams.append('size', selectedSize)
@@ -47,6 +62,22 @@ function FilterBar() {
     const handeSizeSelection =(selectedSize) =>{
         setSelectedSize([selectedSize]);
     };
+
+    const handleCategorySelection=(categoryId)=>{
+        const updateCategories = selectedCategories.includes(categoryId)
+        ? selectedCategories.filter((id)=>id !==categoryId)
+        : [...selectedCategories, categoryId];
+        setselectedCategories(updateCategories);
+
+    }
+
+    const handleBrandSelection=(brandId)=>{
+        const updateBrands = selectedBrand.includes(brandId)
+        ? selectedBrand.filter((id)=>id !==brandId)
+        : [...selectedBrand, brandId];
+        setselectedBrand(updateBrands);
+
+    }
 
   
 
@@ -73,7 +104,11 @@ function FilterBar() {
 {categories.map((category)=>(
 
 <div key={category.id} className="flex items-center mt-1">
-<input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
+<input
+ type="checkbox" 
+ checked={selectedCategories.includes(category.id)}
+ onChange={()=>handleCategorySelection(category.id)}
+ className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
 <label className="ml-3 text-gray-950">{category.title}</label>
 <div className="ml-auto text-gray-600 text-sm">( {category.product_count} )</div>
 
@@ -100,7 +135,10 @@ function FilterBar() {
 {brands.map((brand)=>(
 
 <div key={brand.id} className="flex items-center mt-1">
-<input type="checkbox" className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
+<input type="checkbox" 
+ checked={selectedBrand.includes(brand.id)}
+ onChange={()=>handleBrandSelection(brand.id)}
+className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
 <label className="ml-3 text-gray-950">{brand.title}</label>
 <div className="ml-auto text-gray-600 text-sm">( {brand.product_count} )</div>
 
