@@ -27,3 +27,15 @@ export const getProduct = () => async  (dispatch)=>{
         dispatch({type:'PRODUCT_FAIL', payload:error.message || "Error system" })
     }
 };
+
+
+export const getTopProduct = () => async  (dispatch)=>{
+    dispatch({type:'TOP_PRODUCT_REQUEST'});
+    try{
+        const response = await axios.get(BASE_URL+"/product/select/?is_top=True");
+        dispatch({type:'TOP_PRODUCT_SUCCESS', payload:response.data});
+    }
+    catch(error){
+        dispatch({type:'TOP_PRODUCT_FAIL', payload:error.message || "Error system" })
+    }
+};

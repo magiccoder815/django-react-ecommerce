@@ -47,19 +47,19 @@ function HomeScreen() {
 
 
 
-<div class="container pb-16 pt-8 text-center">
-<h2 class="text-2xl md:text-3xl font-medium uppercase font-poppins mb-6 text-gray-800" >Shop by Category</h2>
+<div className="container pb-16 pt-8 text-center">
+<h2 className="text-2xl md:text-3xl font-medium uppercase font-poppins mb-6 text-gray-800" >Shop by Category</h2>
 
-<div class="grid lg:grid-cols-3 sm:grid-cols-2 gap-3">
+<div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-3">
 
 
 {loading && <LoadingSpinner/>}
 {error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
 {categories.map((category)=>(
 
-            <div key={category.id} class="overflow-hidden relative group rounded-xl">
-        <img src={category.photo} class="w-full"/>
-        <a href="#" class="absolute inset-0 flex items-center justify-center text-xl
+            <div key={category.id} className="overflow-hidden relative group rounded-xl">
+        <img src={category.photo} className="w-full"/>
+        <a href="#" className="absolute inset-0 flex items-center justify-center text-xl
          text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition"> {category.title}</a>
     </div>
 
@@ -73,20 +73,20 @@ function HomeScreen() {
 
 </div>
 
-       <div class=" pb-16  hidden lg:block">
+       <div className=" pb-16  hidden lg:block">
         <a href="#">
 
-            <img src="img/offer.jpg" class="w-full" />
+            <img src="img/offer.jpg" className="w-full" />
         </a>
 
 
 
        </div>
 
-       <div class="container pb-16   lg:hidden">
+       <div className="container pb-16   lg:hidden">
         <a href="#">
 
-            <img src="img/offer-mobile.jpg" class="w-full" />
+            <img src="img/offer-mobile.jpg" className="w-full" />
         </a>
 
 
@@ -96,10 +96,10 @@ function HomeScreen() {
 
 
 
-<div class="container pb-16">
-    <h2 class="text-2xl md:text-3xl font-medium uppercase font-poppins mb-6 text-gray-800" >Recommed For You</h2>
+<div className="container pb-16">
+    <h2 className="text-2xl md:text-3xl font-medium uppercase font-poppins mb-6 text-gray-800" >Recommed For You</h2>
 
-    <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
+    <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
 
 
 
@@ -108,7 +108,7 @@ function HomeScreen() {
 {products.map((product)=>(
 
           
-<Product product={product}></Product>
+<Product key={product.id} product={product}></Product>
 
     ))}
 
