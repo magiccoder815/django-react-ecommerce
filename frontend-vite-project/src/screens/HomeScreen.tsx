@@ -8,6 +8,7 @@ import { BASE_URL } from '../configUrl';
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Product from '../components/Product';
+import { Link } from 'react-router-dom';
 
 function HomeScreen() {
 
@@ -59,8 +60,10 @@ function HomeScreen() {
 
             <div key={category.id} className="overflow-hidden relative group rounded-xl">
         <img src={category.photo} className="w-full"/>
+        <Link to={`/shop?category=${category.id}`}> 
         <a href="#" className="absolute inset-0 flex items-center justify-center text-xl
          text-white font-roboto font-medium bg-black bg-opacity-60 hover:bg-opacity-40 transition"> {category.title}</a>
+   </Link>
     </div>
 
     ))}

@@ -11,7 +11,7 @@ function FilterBar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+    const sizes = ['xs', 's', 'm', 'l', 'xl'];
     const [selectedSize, setSelectedSize] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setmaxPrice] = useState('');
@@ -78,6 +78,24 @@ function FilterBar() {
         setselectedBrand(updateBrands);
 
     }
+
+    useEffect(()=>{
+
+        const searchparams = new URLSearchParams(location.search)
+
+        setSelectedSize(searchparams.get('size') || '');
+        setMinPrice(searchparams.get('min_price') || '');
+        setmaxPrice(searchparams.get('max_price') || '');
+
+        const SelectedCategoriesParams = searchparams.getAll('category');
+        setselectedCategories(SelectedCategoriesParams.map(Number));
+
+        const SelectedbrandParams = searchparams.getAll('brand');
+        setselectedBrand(SelectedbrandParams.map(Number));
+
+
+
+    },[location.search])
 
   
 
@@ -158,9 +176,9 @@ className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
         <h3 className="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Price</h3>
 
         <div className="mt-4 flex items-center">
-            <input onChange={(e)=>setMinPrice(e.target.value)} className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
+            <input value={minPrice} onChange={(e)=>setMinPrice(e.target.value)} className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
            <span className="mx-3 text-gray-600"> - </span>
-            <input onChange={(e)=>setmaxPrice(e.target.value)}  className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
+            <input value={maxPrice} onChange={(e)=>setmaxPrice(e.target.value)}  className="w-full border-gray-500 py-1 px-3 text-gray-600 text-sm shadow-sm rounded" placeholder="min" />
 
 
         </div>
@@ -185,7 +203,7 @@ className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
      id={`size-${size.toLowerCase()}`}
      />
    <label htmlFor={`size-${size.toLowerCase()}`}className="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
-   items-center justify-center cursor-pointer shadow-sm text-gray-900" >{size}</label>
+   items-center justify-center cursor-pointer shadow-sm text-gray-900 uppercase" >{size}</label>
 
    </div>
 

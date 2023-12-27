@@ -92,12 +92,12 @@ function Header() {
      
          
 
-
+<Link to={`/shop?category=${category.id}`}> 
      <a key={category.id} className="px-6 py-3 flex items-center hover:bg-gray-200 transition">
      <i className={category.menuicon}></i>
     <span className="ml-6 text-gray-500 text-sm font-semibold">{category.title}</span> 
   </a>
-
+  </Link>
          
 
     ))}
