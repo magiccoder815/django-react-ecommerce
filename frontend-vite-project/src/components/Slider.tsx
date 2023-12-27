@@ -45,11 +45,7 @@ useEffect(()=>{
         loop:true,
       });
     };
-    animateImage();
 
-  },[]);
-
-  useEffect(()=>{
     const animateImage2= ()=>{
       anime({
         targets: '.sliderbg',
@@ -60,9 +56,14 @@ useEffect(()=>{
         loop:true,
       });
     };
+
+
+    animateImage();
     animateImage2();
 
-  },[]);
+  },[sliders]);
+
+ 
 
   return (
     <div>
