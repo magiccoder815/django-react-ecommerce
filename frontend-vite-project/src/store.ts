@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
 import { ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
+import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
 
 const store = configureStore({
   reducer: {
@@ -9,7 +10,9 @@ const store = configureStore({
     products:ProductReducer,
     topproducts:TopProductReducer,
     brands:brandReducer,
-    searchproducts:SearchProductReducer
+    searchproducts:SearchProductReducer,
+    sliders:sliderReducer,
+    socials:SocialReducer
   },
 });
 
