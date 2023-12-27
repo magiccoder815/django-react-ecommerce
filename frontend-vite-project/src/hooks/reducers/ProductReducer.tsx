@@ -2,7 +2,8 @@ import {
     CATEGORIES_FAIL, CATEGORIES_REQUEST, CATEGORIES_SUCCESS,
     PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS,
     TOP_PRODUCT_FAIL, TOP_PRODUCT_REQUEST, TOP_PRODUCT_SUCCESS,
-    BRAND_FAIL, BRAND_REQUEST, BRAND_SUCCESS
+    BRAND_FAIL, BRAND_REQUEST, BRAND_SUCCESS, 
+    SEARCH_PRODUCT_FAIL, SEARCH_PRODUCT_REQUEST, SEARCH_PRODUCT_SUCCESS
 
 } from "../constans/Productconstans"
 
@@ -121,6 +122,37 @@ export const TopProductReducer = (state = TopProductinitialState, action )=>{
                 topproducts:action.payload,
             };
         case TOP_PRODUCT_FAIL:
+            return{
+                ...state,
+                loading:false,
+                error:action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
+
+const SearchroductinitialState ={
+    searchproducts : [],
+    loading:false,
+    error:null,
+};
+
+export const SearchProductReducer = (state = SearchroductinitialState, action )=>{
+    switch(action.type){
+        case SEARCH_PRODUCT_REQUEST:
+            return{
+                ...state,
+                loading:true,
+            };
+        case SEARCH_PRODUCT_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                searchproducts:action.payload,
+            };
+        case SEARCH_PRODUCT_FAIL:
             return{
                 ...state,
                 loading:false,

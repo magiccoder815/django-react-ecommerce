@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
-import { ProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
+import { ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
 
 const store = configureStore({
   reducer: {
     categories:categoryReducer,
     products:ProductReducer,
     topproducts:TopProductReducer,
-    brands:brandReducer
+    brands:brandReducer,
+    searchproducts:SearchProductReducer
   },
 });
 

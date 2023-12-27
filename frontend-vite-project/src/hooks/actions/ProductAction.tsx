@@ -50,3 +50,14 @@ export const getTopProduct = () => async  (dispatch)=>{
         dispatch({type:'TOP_PRODUCT_FAIL', payload:error.message || "Error system" })
     }
 };
+
+export const getSearchProduct = (url) => async  (dispatch)=>{
+    dispatch({type:'SEARCH_PRODUCT_REQUEST'});
+    try{
+        const response = await axios.get(url);
+        dispatch({type:'SEARCH_PRODUCT_SUCCESS', payload:response.data});
+    }
+    catch(error){
+        dispatch({type:'SEARCH_PRODUCT_FAIL', payload:error.message || "Error system" })
+    }
+};

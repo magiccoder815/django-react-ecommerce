@@ -2,21 +2,27 @@ import React, { useEffect } from 'react'
 import FilterBar from '../components/FilterBar'
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
-import { getProduct } from '../hooks/actions/ProductAction';
+import { getProduct, getSearchProduct } from '../hooks/actions/ProductAction';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import Product from '../components/Product';
+import { useLocation } from 'react-router-dom';
+import { BASE_URL } from '../configUrl';
 
 function ShopScreen() {
 
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    const url = BASE_URL+"/product/select/?"+searchParams;
+
     
     const dispatch = useDispatch();
-    const {products, error:proError ,loading:proLoading} =useAppSelector((state)=>state.products);
+    const {searchproducts, error:proError ,loading:proLoading} =useAppSelector((state)=>state.searchproducts);
 
 
     useEffect(()=>{
-        dispatch(getProduct());
-    },[dispatch]);
+        dispatch(getSearchProduct(url));
+    },[dispatch, url]);
 
 
   return (
@@ -79,7 +85,7 @@ function ShopScreen() {
 
           {proLoading && <LoadingSpinner/>}
 {proError && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
-{products.map((product)=>(
+{searchproducts.map((product)=>(
 
           
 <Product product={product}></Product>
