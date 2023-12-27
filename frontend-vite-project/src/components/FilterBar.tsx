@@ -4,7 +4,7 @@ import { useAppSelector } from '../store';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import { getCategories, getbrands } from '../hooks/actions/ProductAction';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function FilterBar() {
 
@@ -236,7 +236,11 @@ className="text-primary focus:ring-0 cursor-pointer rounded-sm"/>
        border-primary rounded-xl font-medium hover:bg-transparent hover:text-primary">Filter</a>
 
 
+<Link to={`/shop`}>
 
+        <a class="block w-full py-2 mt-3 text-center text-white bg-second border
+       border-primary rounded-xl font-medium hover:bg-transparent hover:text-second">Clear</a>
+</Link>
        
 
 

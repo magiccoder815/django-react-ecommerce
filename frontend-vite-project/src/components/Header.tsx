@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useDispatch } from 'react-redux';
@@ -10,11 +10,18 @@ import { getCategories } from '../hooks/actions/ProductAction';
 function Header() {
 
     const dispatch = useDispatch();
+    const [searchText, setSearchText] = useState('');
+    const navigate = useNavigate();
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
 
     useEffect(()=>{
         dispatch(getCategories());
     },[dispatch]);
+
+    const handleSearch= ()=>{
+        const searchQuery = `?title=${searchText}`;
+        navigate(`/shop${searchQuery}`);
+    }
 
   return (
     <div>
@@ -32,8 +39,8 @@ function Header() {
                 <span className="absolute left-4 top-3 text-lg text-gray-700">
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" className="w-full pl-12 border border-r-0 border-primary py-3 px-3 rounded-xl shadow-sm focus:ring-primary" placeholder="Search..."/>
-                <button type="submit" className="bg-primary text-white border border-primary px-8 font-medium rounded-xl hover:bg-transparent hover:text-primary transition">Search</button>
+                <input value={searchText} onChange={(e)=> setSearchText(e.target.value)} type="text" className="w-full pl-12 border border-r-0 border-primary py-3 px-3 rounded-xl shadow-sm focus:ring-primary" placeholder="Search..."/>
+                <button onClick={handleSearch} type="submit" className="bg-primary text-white border border-primary px-8 font-medium rounded-xl hover:bg-transparent hover:text-primary transition">Search</button>
 
 
             </div>
