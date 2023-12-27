@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import  serializers, viewsets
@@ -43,6 +43,7 @@ class ProductViewSet(viewsets.ModelViewSet):
    
     queryset = Product.objects.all()
     http_method_names=['get']
+   # lookup_field='slug'
 
     def list(self, request):
 
@@ -90,4 +91,11 @@ class ProductViewSet(viewsets.ModelViewSet):
         product = Product.objects.get(pk=pk)
         serializer = ProductSerializer(product)
         return Response (serializer.data)
+    
+    # def retrieve(self, request, *args, **kwargs):
+       #  slug=kwargs.get('slug')
+        # product = get_object_or_404(Product, slug=slug)
+        # serializer = ProductSerializer(product)
+         # return Response (serializer.data)
+        
 
