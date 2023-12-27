@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store';
+import { getSocials } from '../hooks/actions/SettingsAction';
+import LoadingSpinner from './LoadingSpinner';
+import ErrorMessage from './ErrorMessage';
 
 function Footer() {
+
+    const dispatch = useDispatch();
+    const {socials, error ,loading} =useAppSelector((state)=>state.socials);
+
+
+    useEffect(()=>{
+        dispatch(getSocials());
+    },[dispatch]);
+
+
   return (
     <div>
 
@@ -13,30 +28,26 @@ function Footer() {
              <p className="text-gray-400 text-sm font-poppins" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, reprehenderit.</p>
 
              <div className="flex space-x-5">
-                 <a href="#" className="text-gray-400 text-sm font-poppins hover:text-gray-100">
-                     <i className="fa-brands fa-facebook"></i>
 
-                 </a>
 
-                 <a href="#" className="text-gray-400 text-sm font-poppins hover:text-gray-100">
-                     <i className="fa-brands fa-twitter"></i>
+             {loading && <LoadingSpinner/>}
+{error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{socials.map((social)=>(
 
-                 </a>
+<a href={social.urllink} target='_blank' className="text-gray-400 text-sm font-poppins hover:text-gray-100">
+<i className={social.menuicon}></i>
 
-                 <a href="#" className="text-gray-400 text-sm font-poppins hover:text-gray-100">
-                     <i className="fa-brands fa-instagram"></i>
+</a>
 
-                 </a>
 
-                 <a href="#" className="text-gray-400 text-sm font-poppins hover:text-gray-100">
-                     <i className="fa-brands fa-github"></i>
 
-                 </a>
 
-                 <a href="#" className="text-gray-400 text-sm font-poppins hover:text-gray-100">
-                     <i className="fa-brands fa-youtube"></i>
+    ))}
 
-                 </a>
+
+
+               
+
 
 
              </div>
