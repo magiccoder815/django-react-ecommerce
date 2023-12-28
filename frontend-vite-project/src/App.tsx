@@ -13,6 +13,7 @@ import Register from './screens/auth/Register';
 import ShopScreen from './screens/ShopScreen';
 import { Provider } from 'react-redux';
 import store from './store';
+import ProductDetail from './screens/ProductDetail';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
         <Route path="/auth/login" element={<Login/>} /> 
         <Route path="/auth/register" element={<Register/>} /> 
         <Route path="/shop" element={<ShopScreen/>} /> 
+        <Route path="/product" element={<ProductDetail/>} /> 
       </Routes>
       <Footer/>
     </BrowserRouter>
