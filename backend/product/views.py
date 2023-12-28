@@ -43,7 +43,8 @@ class ProductViewSet(viewsets.ModelViewSet):
    
     queryset = Product.objects.all()
     http_method_names=['get']
-   # lookup_field='slug'
+   
+    lookup_field='slug'
 
     def list(self, request):
 
@@ -87,15 +88,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = ProductSerializer(self.queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        product = Product.objects.get(pk=pk)
+  
+    
+    def retrieve(self, request, *args, **kwargs):
+        slug=kwargs.get('slug')
+        product = get_object_or_404(Product, slug=slug)
         serializer = ProductSerializer(product)
         return Response (serializer.data)
-    
-    # def retrieve(self, request, *args, **kwargs):
-       #  slug=kwargs.get('slug')
-        # product = get_object_or_404(Product, slug=slug)
-        # serializer = ProductSerializer(product)
-         # return Response (serializer.data)
         
 

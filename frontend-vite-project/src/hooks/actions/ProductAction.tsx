@@ -1,6 +1,7 @@
 import { BASE_URL } from "../../configUrl";
 import { 
     CATEGORIES_FAIL, CATEGORIES_REQUEST, CATEGORIES_SUCCESS,
+    PRODUCT_DETAIL_RESET,
     PRODUCT_FAIL, PRODUCT_REQUEST, PRODUCT_SUCCESS
 
 } from "../constans/Productconstans"
@@ -67,8 +68,13 @@ export const getProductDetail = (url) => async  (dispatch)=>{
     try{
         const response = await axios.get(url);
         dispatch({type:'PRODUCT_DETAIL_SUCCESS', payload:response.data});
+   
     }
     catch(error){
         dispatch({type:'PRODUCT_DETAIL_FAIL', payload:error.message || "Error system" })
     }
+     
 };
+export const resetProductDetail=()=>{
+    return{type:PRODUCT_DETAIL_RESET};
+}

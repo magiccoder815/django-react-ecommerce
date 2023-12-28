@@ -4,7 +4,7 @@ import {
     TOP_PRODUCT_FAIL, TOP_PRODUCT_REQUEST, TOP_PRODUCT_SUCCESS,
     BRAND_FAIL, BRAND_REQUEST, BRAND_SUCCESS, 
     SEARCH_PRODUCT_FAIL, SEARCH_PRODUCT_REQUEST, SEARCH_PRODUCT_SUCCESS,
-    PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS
+    PRODUCT_DETAIL_FAIL, PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_DETAIL_RESET
 
 } from "../constans/Productconstans"
 
@@ -129,6 +129,8 @@ export const ProductDetailReducer = (state = ProductDetail, action )=>{
                 loading:false,
                 error:action.payload,
             };
+        case PRODUCT_DETAIL_RESET:
+            return ProductDetail;
         default:
             return state;
     }

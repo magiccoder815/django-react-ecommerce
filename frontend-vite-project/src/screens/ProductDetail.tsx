@@ -3,13 +3,13 @@ import Topproducts from '../components/Topproducts'
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { BASE_URL, CLOUD_URL } from '../configUrl';
-import { getProductDetail } from '../hooks/actions/ProductAction';
+import { getProductDetail, resetProductDetail } from '../hooks/actions/ProductAction';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 function ProductDetail() {
 
-    const {id} = useParams();
+    const {slug} = useParams();
 
 
     const [quantity, setQuantity] = useState(1);
@@ -31,17 +31,19 @@ function ProductDetail() {
 
     const dispatch = useDispatch();
     const {productDetail, error ,loading} =useAppSelector((state)=>state.productDetail);
-    const url = BASE_URL+"/product/select/"+id;
+    const url = BASE_URL+"/product/select/"+slug;
 
     useEffect(()=>{
         if(!productDetail.id){
             const fetchProductDetail = async ()=>{
                 await dispatch(getProductDetail(url));
+               
             }
             
             fetchProductDetail();
 
             return()=>{
+               
 
             }
         }
