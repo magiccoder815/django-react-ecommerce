@@ -50,6 +50,15 @@ function ProductDetail() {
         
     },[dispatch, productDetail.id, url ]);
 
+    useEffect(()=>{
+        if(productDetail.id){
+            setmainImg(CLOUD_URL+productDetail.image);
+            setselectedThumbnail(CLOUD_URL+productDetail.image);
+        }
+
+
+    }, [productDetail])
+
 
 
 

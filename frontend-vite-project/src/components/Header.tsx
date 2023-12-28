@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { getCategories } from '../hooks/actions/ProductAction';
+import { LOC_URL } from '../configUrl';
 
 
 function Header() {
@@ -37,7 +38,7 @@ function Header() {
 
     <div className="container flex items-center justify-between">
             <a href="">
-                <img src="img/logo.png" className="h-14" />
+                <img src={`${LOC_URL}/img/logo.png`} className="h-14" />
             </a>
 
 

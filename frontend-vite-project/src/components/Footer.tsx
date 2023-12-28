@@ -4,6 +4,7 @@ import { useAppSelector } from '../store';
 import { getSocials } from '../hooks/actions/SettingsAction';
 import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
+import { LOC_URL } from '../configUrl';
 
 function Footer() {
 
@@ -24,7 +25,7 @@ function Footer() {
   <div className="container">
      <div className="xl:grid xl:grid-cols-3 xl:gap-8">
          <div className="space-y-8 xl:col-span-1">
-             <img src="img/logo.png" className="w-64 h-auto" alt="Youtube Efe Görkem Ümit" />
+             <img src={`${LOC_URL}/img/logo.png`} className="w-64 h-auto" alt="Youtube Efe Görkem Ümit" />
              <p className="text-gray-400 text-sm font-poppins" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, reprehenderit.</p>
 
              <div className="flex space-x-5">
@@ -138,7 +139,7 @@ function Footer() {
                  <p className="text-white font-semibold">© Youtube Efe Görkem Ümit</p>
 
                  <div>
-                     <img src="img/pay.png" className="w-96" />
+                     <img src={`${LOC_URL}/img/pay.png`}className="w-96" />
                  </div>
 
 
