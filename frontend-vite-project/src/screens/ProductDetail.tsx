@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Topproducts from '../components/Topproducts'
 
 function ProductDetail() {
+
+    const [quantity, setQuantity] = useState(1);
+    const [mainImg, setmainImg] = useState('img/product/shoes-1.png');
+    const [selectedThumbnail, setselectedThumbnail] = useState('img/product/shoes-1.png');
+
+    const handleDecrement=()=>{
+        if(quantity > 1 ) setQuantity(quantity-1);
+    };
+    const handleIncrement=()=>{
+       setQuantity(quantity+1);
+    };
+
+    const handleImageClick = (imgPath:string)=>{
+        setmainImg(imgPath);
+        setselectedThumbnail(imgPath);
+
+    };
+
+
+
+
   return (
     <div>
         
@@ -32,25 +53,42 @@ function ProductDetail() {
     <div>
 
         <div>
-            <img id="main-img" src="img/product/shoes-1.png" class="w-full" />
+            <img id="main-img" src={mainImg} class="w-full" />
         </div>
 
         <div class="grid grid-cols-5 gap-4 mt-4">
+         
+         
             <div>
-                <img src="img/product/shoes-1.png" class="single-img cursor-pointer border border-primary w-full" />
+                <img 
+                src="img/product/shoes-1.png"
+                 class={`"single-img cursor-pointer border  w-full 
+                 ${selectedThumbnail === 'img/product/shoes-1.png' ? 'border-primary' : '' } `}
+                 onClick={()=>handleImageClick('img/product/shoes-1.png')}
+                 
+                 />
             </div>
+
             <div>
-                <img src="img/product/shoes-2.png" class="single-img cursor-pointer border  w-full" />
+                <img 
+                src="img/product/shoes-2.png"
+                 class={`"single-img cursor-pointer border  w-full 
+                 ${selectedThumbnail === 'img/product/shoes-2.png' ? 'border-primary' : '' } `}
+                 onClick={()=>handleImageClick('img/product/shoes-2.png')}
+                 
+                 />
             </div>
+
             <div>
-                <img src="img/product/shoes-3.png" class="single-img cursor-pointer border  w-full" />
+                <img 
+                src="img/product/shoes-3.png"
+                 class={`"single-img cursor-pointer border  w-full 
+                 ${selectedThumbnail === 'img/product/shoes-3.png' ? 'border-primary' : '' } `}
+                 onClick={()=>handleImageClick('img/product/shoes-3.png')}
+                 
+                 />
             </div>
-            <div>
-                <img src="img/product/shoes-4.png" class="single-img cursor-pointer border  w-full" />
-            </div>
-            <div>
-                <img src="img/product/shoes-5.png" class="single-img cursor-pointer border  w-full" />
-            </div>
+          
     
 
 
@@ -167,9 +205,9 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati nam reiciend
         <div class="mt-4">
             <h3 class="text-gray-700 mb-2 text-lg">Quantity</h3>
             <div class="flex border border-gray-500 text-gray-600 divide-x divide-gray-500 w-max">
-                <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onclick="decr()" > - </div>
-                <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> 1 </div>
-                <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onclick="incr()"> + </div>
+                <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onClick={handleDecrement} > - </div>
+                <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> {quantity} </div>
+                <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onClick={handleIncrement}> + </div>
 
             </div>
 
