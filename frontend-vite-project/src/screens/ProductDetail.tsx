@@ -4,8 +4,13 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { BASE_URL } from '../configUrl';
 import { getProductDetail } from '../hooks/actions/ProductAction';
+import { useParams } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 function ProductDetail() {
+
+    const {id} = useParams();
+
 
     const [quantity, setQuantity] = useState(1);
     const [mainImg, setmainImg] = useState('img/product/shoes-1.png');
@@ -25,12 +30,25 @@ function ProductDetail() {
     };
 
     const dispatch = useDispatch();
-    const {productDetail, error:proError ,loading:proLoading} =useAppSelector((state)=>state.productDetail);
-    const url = BASE_URL+"/product/select/";
+    const {productDetail, error ,loading} =useAppSelector((state)=>state.productDetail);
+    const url = BASE_URL+"/product/select/"+id;
 
     useEffect(()=>{
-        dispatch(getProductDetail(url));
-    },[dispatch]);
+        if(!productDetail.id){
+            const fetchProductDetail = async ()=>{
+                await dispatch(getProductDetail(url));
+            }
+            
+            fetchProductDetail();
+
+            return()=>{
+
+            }
+        }
+
+
+        
+    },[dispatch, productDetail.id, url ]);
 
 
 
@@ -128,8 +146,22 @@ function ProductDetail() {
         <div class="text-xs text-gray-500 ml-3">(120)</div>
 
 
+        {loading && <LoadingSpinner/>}
+{error && <ErrorMessage errorMessage={error.message} ></ErrorMessage> }
+{Object.keys(productDetail).length>0 ?(
 
-    </div>
+<div key={productDetail.id}>
+    
+    {productDetail.title}
+</div>
+
+):
+<div>No product</div>
+
+}
+
+</div>
+    
     <div class="space-y-3">
         <p class="space-x-4 mt-2">
             <span class="text-xl">Avaible : </span>
