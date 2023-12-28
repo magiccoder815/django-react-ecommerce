@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Topproducts from '../components/Topproducts'
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../store';
+import { BASE_URL } from '../configUrl';
+import { getProductDetail } from '../hooks/actions/ProductAction';
 
 function ProductDetail() {
 
@@ -19,6 +23,14 @@ function ProductDetail() {
         setselectedThumbnail(imgPath);
 
     };
+
+    const dispatch = useDispatch();
+    const {productDetail, error:proError ,loading:proLoading} =useAppSelector((state)=>state.productDetail);
+    const url = BASE_URL+"/product/select/";
+
+    useEffect(()=>{
+        dispatch(getProductDetail(url));
+    },[dispatch]);
 
 
 

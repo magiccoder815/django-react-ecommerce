@@ -61,3 +61,14 @@ export const getSearchProduct = (url) => async  (dispatch)=>{
         dispatch({type:'SEARCH_PRODUCT_FAIL', payload:error.message || "Error system" })
     }
 };
+
+export const getProductDetail = (url) => async  (dispatch)=>{
+    dispatch({type:'PRODUCT_DETAIL_REQUEST'});
+    try{
+        const response = await axios.get(url);
+        dispatch({type:'PRODUCT_DETAIL_SUCCESS', payload:response.data});
+    }
+    catch(error){
+        dispatch({type:'PRODUCT_DETAIL_FAIL', payload:error.message || "Error system" })
+    }
+};
