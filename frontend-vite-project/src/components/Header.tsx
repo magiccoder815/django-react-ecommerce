@@ -23,6 +23,12 @@ function Header() {
         navigate(`/shop${searchQuery}`);
     }
 
+    const [mobileMenuVisible, setMobileMenuVisible]=useState(false);
+
+    const toggleMobileMenu=()=>{
+        setMobileMenuVisible(!mobileMenuVisible);
+    }
+
   return (
     <div>
 
@@ -46,7 +52,7 @@ function Header() {
             </div>
 
                <div className="space-x-4 flex items-center">
-                <a href="#" className="block text-center text-gray-700 hover:text-primary transition relative">
+                <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
                     <span className="absolute -right-2 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 2</span>
                     <div className="text-2xl">
@@ -54,7 +60,7 @@ function Header() {
                     </div>
                 </a>
 
-                <a href="#" className="block text-center text-gray-700 hover:text-primary transition relative">
+                <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
                     <span className="absolute -right-2 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 3</span>
                     <div className="text-2xl">
@@ -62,7 +68,7 @@ function Header() {
                     </div>
                 </a>
 
-                <a href="#" className="block text-center text-gray-700 hover:text-primary transition relative">
+                <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
                     <div className="text-2xl">
                         <i className="fa-solid fa-user"></i>
@@ -153,15 +159,15 @@ function Header() {
 
          <div className="lg:hidden flex z-40 fixed w-full border-t border-gray-900 shadow-xl bg-white py-3 bottom-0 justify-around items-start px-6">
 
-            <a href="#" className="block text-center text-gray-950 hover:text-primary transition relative">
-                <div className="text-2xl" id="menuBar">
+            <a  className="block text-center text-gray-950 hover:text-primary transition relative">
+                <div onClick={toggleMobileMenu} className="text-2xl">
                     <i className="fa-solid fa-bars"></i> 
                 </div>
 
                 <div className="text-xs leading-3">Menu</div>
             </a>
 
-            <a href="#" className="block text-center text-gray-950 hover:text-primary transition relative">
+            <a  className="block text-center text-gray-950 hover:text-primary transition relative">
                 <div className="text-2xl">
                     <i className="fa-solid fa-magnifying-glass"></i>
                  </div>
@@ -169,7 +175,7 @@ function Header() {
                 <div className="text-xs leading-3">Search</div>
             </a>
 
-            <a href="#" className="block text-center text-gray-950 hover:text-primary transition relative">
+            <a  className="block text-center text-gray-950 hover:text-primary transition relative">
                 <div className="text-2xl">
                     <i className="fa-solid fa-bars-progress"></i>
                 </div>
@@ -177,7 +183,7 @@ function Header() {
                 <div className="text-xs leading-3">Category</div>
             </a>
 
-            <a href="#" className="block text-center text-gray-950 hover:text-primary transition relative">
+            <a  className="block text-center text-gray-950 hover:text-primary transition relative">
                 <span className="absolute -right-3 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 3</span>
                 <div className="text-2xl">
                     <i className="fa-solid fa-cart-shopping"></i>
@@ -193,25 +199,37 @@ function Header() {
 
        
 
-                    <div className="fixed left-0 top-0 w-full h-full z-50 bg-black bg-opacity-30  shadow hidden" id="mobileMenu">
+                    <div className=
+                    {`fixed left-0 top-0 w-full h-full z-50 bg-black bg-opacity-30  shadow ${mobileMenuVisible ? '' :'hidden'}`} 
+                    >
                         <div className="absolute left-0 top-0 w-72 h-full z-50 bg-white shadow-md">
                             <div className="text-gray-600 hover:text-primary text-lg absolute right-3 top-3 cursor-pointer" id="closeMenu">
 
-                                <i className="fa-solid fa-xmark"></i>
+                                <i onClick={toggleMobileMenu} className="fa-solid fa-xmark"></i>
 
                             </div>
 
                             <h3 className="text-xl pt-6 pl-4 font-roboto text-gray-700 font-semibold"> Menu</h3>
                             <div>
 
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-home"></i> Home</a>
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-cart-shopping"></i> Shop</a>
-
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-address-card"></i> About</a>
-
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-phone"></i> Contact</a>
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user"></i> Login</a>
-                                <a href="#" className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user-plus"></i> Register</a>
+                              <Link to="/">
+                              <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-home"></i> Home</a>
+                              </Link>  
+                              <Link to="/shop">
+                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-cart-shopping"></i> Shop</a>
+                                </Link>  
+                              <Link to="/about">
+                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-address-card"></i> About</a>
+                                </Link>  
+                              <Link to="/contact">
+                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-phone"></i> Contact</a>
+                                </Link>  
+                              <Link to="/auth/login">
+                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user"></i> Login</a>
+                                </Link>  
+                              <Link to="/auth/register">
+                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user-plus"></i> Register</a>
+                                </Link>  
                             </div>
 
                         </div>
