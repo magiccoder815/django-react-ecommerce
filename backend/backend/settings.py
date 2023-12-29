@@ -4,6 +4,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import cloudinary
+from datetime import timedelta
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -158,7 +159,14 @@ SPECTACULAR_SETTINGS = {
    
 }
 
-          
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=14),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_LAMBDA': lambda token: timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_LAMBDA': lambda token: timedelta(days=14),
+}    
+
 cloudinary.config( 
   cloud_name = "dnmvkq8sl", 
   api_key = "818954278932433", 
