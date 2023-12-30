@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { Userregister } from '../../hooks/actions/UserAction';
 
 function Register() {
 
+    const dispatch = useDispatch();
     const [email, setemail] = useState('');
     const [firstName, setFirstname] = useState('');
     const [username, setusername] = useState('');
@@ -9,7 +12,17 @@ function Register() {
     const [password, setpassword] = useState('');
     const [confirmpassword, setconfirmpassword] = useState('');
 
-    const [isactive, setisactive] = useState('true');
+    const handleRegister = (e) =>{
+        console.log("a")
+        e.preventDefault();
+
+        dispatch(Userregister(email, username, firstName, lastname, password, true))
+
+
+    }
+
+
+
 
 
   return (
@@ -22,28 +35,28 @@ function Register() {
     <h2 className="text-3xl uppercase font-medium mb-1">Register</h2>
     <p className="text-gray-600 mb-6 text-sm">Lorem ipsum dolor sit amet.</p>
 
-    <form method="" action="">
+    <form onSubmit={handleRegister}>
 
         <div className="space-y-5">
             <div>
                 <label className="text-gray-600 mb-3 block"> First Name <span className="text-primary" > * </span></label>
-                <input type="email" className="input-box" placeholder="example@example.com"/>
+                <input type="text" value={firstName} onChange={(e)=>setFirstname(e.target.value)} className="input-box" placeholder="example@example.com"/>
             </div>
             <div>
                 <label className="text-gray-600 mb-3 block"> Last Name <span className="text-primary" > * </span></label>
-                <input type="email" className="input-box" placeholder="example@example.com"/>
+                <input type="text" value={lastname} onChange={(e)=>setlastname(e.target.value)} className="input-box" placeholder="example@example.com"/>
             </div>
             <div>
                 <label className="text-gray-600 mb-3 block"> Email Adress <span className="text-primary" > * </span></label>
-                <input type="email" className="input-box" placeholder="example@example.com"/>
+                <input type="email" value={email} onChange={(e)=>setemail(e.target.value)} className="input-box" placeholder="example@example.com"/>
             </div>
             <div>
                 <label className="text-gray-600 mb-3 block"> Password <span className="text-primary" > * </span></label>
-                <input type="password" className="input-box" placeholder="Enter Password"/>
+                <input type="password" value={password} onChange={(e)=>setpassword(e.target.value)} className="input-box" placeholder="Enter Password"/>
             </div>
             <div>
                 <label className="text-gray-600 mb-3 block"> Confirm Password <span className="text-primary" > * </span></label>
-                <input type="password" className="input-box" placeholder="Enter Password"/>
+                <input type="password"  value={confirmpassword} onChange={(e)=>setconfirmpassword(e.target.value)} className="input-box" placeholder="Enter Password"/>
             </div>
 
 
