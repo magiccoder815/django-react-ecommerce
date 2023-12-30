@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Register() {
+
+    const [email, setemail] = useState('');
+    const [firstName, setFirstname] = useState('');
+    const [username, setusername] = useState('');
+    const [lastname, setlastname] = useState('');
+    const [password, setpassword] = useState('');
+    const [confirmpassword, setconfirmpassword] = useState('');
+
+    const [isactive, setisactive] = useState('true');
+
+
   return (
     <div>
 
@@ -15,7 +26,11 @@ function Register() {
 
         <div className="space-y-5">
             <div>
-                <label className="text-gray-600 mb-3 block"> Full Name <span className="text-primary" > * </span></label>
+                <label className="text-gray-600 mb-3 block"> First Name <span className="text-primary" > * </span></label>
+                <input type="email" className="input-box" placeholder="example@example.com"/>
+            </div>
+            <div>
+                <label className="text-gray-600 mb-3 block"> Last Name <span className="text-primary" > * </span></label>
                 <input type="email" className="input-box" placeholder="example@example.com"/>
             </div>
             <div>
