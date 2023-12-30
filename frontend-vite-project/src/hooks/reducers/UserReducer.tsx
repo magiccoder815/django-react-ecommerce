@@ -13,13 +13,13 @@ export const userRegisterReducer = (state = Register, action )=>{
                 ...state,
                 loading:true,
             };
-        case USER_REGISTER_FAIL:
+        case USER_REGISTER_SUCCESS:
             return{
                 ...state,
                 loading:false,
                 userRegister:action.payload,
             };
-        case USER_REGISTER_SUCCESS:
+        case USER_REGISTER_FAIL:
             return{
                 ...state,
                 loading:false,
