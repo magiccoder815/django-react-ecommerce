@@ -3,7 +3,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
 import { ProductDetailReducer, ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
 import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
-import { userRegisterReducer } from './hooks/reducers/UserReducer';
+import { UserLoginReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
 
 const store = configureStore({
   reducer: {
@@ -15,7 +15,8 @@ const store = configureStore({
     searchproducts:SearchProductReducer,
     sliders:sliderReducer,
     socials:SocialReducer,
-    userRegister:userRegisterReducer
+    userRegister:userRegisterReducer,
+    userInfo:UserLoginReducer
   },
 });
 

@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import LoadingSpinner from '../../components/LoadingSpinner'
+import ErrorMessage from '../../components/ErrorMessage'
+import { useDispatch } from 'react-redux';
+import { UserLogin } from '../../hooks/actions/UserAction';
+import { useAppSelector } from '../../store';
 
 function Login() {
+
+    const dispatch = useDispatch();
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
+
+    const {userInfo, error ,loading} =useAppSelector((state)=>state.userInfo);
+ 
+
+
+    const handleLogin = (e) =>{
+
+       
+       
+        e.preventDefault();
+
+       
+
+
+        dispatch(UserLogin(email,password))
+     
+
+
+    }
+
+
+
   return (
     <div>
         
@@ -11,31 +42,24 @@ function Login() {
     <h2 className="text-3xl uppercase font-medium mb-1">Login</h2>
     <p className="text-gray-600 mb-6 text-sm">Lorem ipsum dolor sit amet.</p>
 
-    <form method="" action="">
+    {loading && <LoadingSpinner/>}
+    {error && <ErrorMessage errorMessage={error}></ErrorMessage>}
+    <form onSubmit={handleLogin}>
 
         <div className="space-y-5">
             <div>
                 <label className="text-gray-600 mb-3 block"> Email Adress <span className="text-primary" > * </span></label>
-                <input type="email" className="input-box" placeholder="example@example.com"/>
+                <input type="email" value={email} onChange={(e)=>setemail(e.target.value)} className="input-box" placeholder="example@example.com"/>
             </div>
             <div>
                 <label className="text-gray-600 mb-3 block"> Password <span className="text-primary" > * </span></label>
-                <input type="password" className="input-box" placeholder="Enter Password"/>
+                <input type="password" value={password} onChange={(e)=>setpassword(e.target.value)} className="input-box" placeholder="Enter Password"/>
             </div>
 
 
         </div>
 
-        <div className="flex items-center justify-between mt-6">
-            <div className="flex items-center">
-                <input type="checkbox" className="text-primary focus:ring-0 rounded-xl cursor-pointer"/>
-                <label className="text-gray-800 ml-3">Remember me</label>
-
-
-            </div>
-
-
-        </div>
+     
         <div className="mt-4">
             <button type="submit" className="block w-full py-2 text-center text-white bg-primary border
              border-primary rounded-xl uppercase hover:bg-transparent hover:text-primary transition ">Login</button>
