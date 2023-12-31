@@ -11,7 +11,7 @@ function Login() {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
 
-    const {userInfo, error ,loading} =useAppSelector((state)=>state.userInfo);
+    const {userLogin, error ,loading} =useAppSelector((state)=>state.userLogin);
  
 
 

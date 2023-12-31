@@ -34,7 +34,7 @@ export const userRegisterReducer = (state = Register, action )=>{
 }
 
 const Login ={
-    userInfo : [],
+    userLogin : [],
     loading:false,
     error:null,
 };
@@ -50,7 +50,7 @@ export const UserLoginReducer = (state = Login, action )=>{
             return{
                 ...state,
                 loading:false,
-                userInfo:action.payload,
+                userLogin:action.payload,
             };
         case USER_LOGIN_FAIL:
             return{

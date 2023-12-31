@@ -48,8 +48,7 @@ export const UserLogin = (username, password) => async  (dispatch)=>{
 
         const response = await axios.post(BASE_URL+"/customer/login/",data, config);
         dispatch({type:'USER_LOGIN_SUCCESS', payload:response.data});
-        localStorage.setItem('token', response.data.access)
-        localStorage.setItem('id', response.data.id)
+        localStorage.setItem('userInfo', JSON.stringify(response.data))
     }
     catch(error){
         dispatch({type:'USER_LOGIN_FAIL', payload:error.message || "Error system" })

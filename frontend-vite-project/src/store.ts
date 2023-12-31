@@ -5,6 +5,8 @@ import { ProductDetailReducer, ProductReducer, SearchProductReducer, TopProductR
 import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
 import { UserLoginReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
 
+const userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo") || 'null');
+
 const store = configureStore({
   reducer: {
     categories:categoryReducer,
@@ -16,8 +18,11 @@ const store = configureStore({
     sliders:sliderReducer,
     socials:SocialReducer,
     userRegister:userRegisterReducer,
-    userInfo:UserLoginReducer
+    userLogin:UserLoginReducer
   },
+  preloadedState:{
+    userLogin:{userInfo:userInfoFromStorage}
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
