@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { getCategories } from '../hooks/actions/ProductAction';
 import { LOC_URL } from '../configUrl';
+import { userControl } from '../hooks/actions/UserAction';
 
 
 function Header() {
@@ -14,9 +15,11 @@ function Header() {
     const [searchText, setSearchText] = useState('');
     const navigate = useNavigate();
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
+    const {userInfo, error:UserInfoError ,loading:UserInfoLoading} =useAppSelector((state)=>state.user);
 
     useEffect(()=>{
         dispatch(getCategories());
+        dispatch(userControl())
     },[dispatch]);
 
     const handleSearch= ()=>{
@@ -140,7 +143,12 @@ function Header() {
                         <a className="text-white font-semibold hover:text-gray-200 transition"> <i className="fa-solid fa-phone"></i> Contact</a>
                         </Link>
                     </div>
-                    <div className="space-x-4">
+
+                    {UserInfoLoading ? (
+        <p><LoadingSpinner></LoadingSpinner> </p>
+      ) : UserInfoError ? (
+        <p>
+  <div className="space-x-4">
                     <Link to='/auth/login'>
                     <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Login</a>
                     </Link>
@@ -148,6 +156,28 @@ function Header() {
                     <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user-plus"></i>  Register</a>
                     </Link>
                 </div>
+
+        </p>
+      ): userInfo ? (
+        <div className="space-x-4">
+        <Link to='/auth/login'>
+        <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Profile</a>
+        </Link>
+        <Link to='/auth/register'>
+        <a className="text-white font-semibold hover:text-gray-200 transition" > <i class="fa-solid fa-right-from-bracket"></i>  Logout</a>
+        </Link>
+    </div>
+
+      ):(
+        <p> user not into</p>
+      ) }
+                    
+              
+               
+
+              
+               
+               
                 </div>
 
 

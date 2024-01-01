@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import ErrorMessage from '../../components/ErrorMessage'
 import { useDispatch } from 'react-redux';
@@ -14,23 +14,22 @@ function Login() {
     const navigate = useNavigate();
 
     const {userLogin, error ,loading} =useAppSelector((state)=>state.userLogin);
+
+    useEffect(()=>{
+        if(!error && userLogin)
+        {
+            navigate('/')
+        }
+    }, [userLogin, error, navigate])
  
 
 
     const handleLogin = (e) =>{
 
-       
-       
         e.preventDefault();
 
-       
-
-
         dispatch(UserLogin(email,password))
-       // navigate('/about')
-     
-
-
+       
     }
 
 
