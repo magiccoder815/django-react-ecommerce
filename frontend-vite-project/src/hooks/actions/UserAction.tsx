@@ -54,3 +54,28 @@ export const UserLogin = (username, password) => async  (dispatch)=>{
         dispatch({type:'USER_LOGIN_FAIL', payload:error.message || "Error system" })
     }
 };
+
+
+export const userControl = () => async  (dispatch)=>{
+    dispatch({type:'USER_INFO_REQUEST'});
+    try{
+        const userInfoFromStorage = localStorage.getItem('userInfo')
+         ? JSON.parse(localStorage.getItem("userInfo"))
+         :null ;
+
+         if(userInfoFromStorage)
+         {
+            dispatch({type:'USER_INFO_SUCCESS', payload:userInfoFromStorage});
+         }
+         else
+         {
+            dispatch({type:'USER_INFO_FAIL', payload:error.message || "Error system" })
+         }
+
+
+       
+    }
+    catch(error){
+        dispatch({type:'USER_INFO_FAIL', payload:error.message || "Error system" })
+    }
+};

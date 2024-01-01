@@ -4,12 +4,14 @@ import ErrorMessage from '../../components/ErrorMessage'
 import { useDispatch } from 'react-redux';
 import { UserLogin } from '../../hooks/actions/UserAction';
 import { useAppSelector } from '../../store';
+import { useNavigate } from 'react-router';
 
 function Login() {
 
     const dispatch = useDispatch();
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
+    const navigate = useNavigate();
 
     const {userLogin, error ,loading} =useAppSelector((state)=>state.userLogin);
  
@@ -25,6 +27,7 @@ function Login() {
 
 
         dispatch(UserLogin(email,password))
+       // navigate('/about')
      
 
 
