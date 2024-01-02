@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializer import MyTokenObtainPairSerializer, UserRegisterSerialiezer
+from .serializer import ChangePasswordSerializer, MyTokenObtainPairSerializer, UserRegisterSerialiezer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
+
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class= MyTokenObtainPairSerializer
 
@@ -24,3 +30,29 @@ class CustomerUserRegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 
+class ChangePasswordApiView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer  = ChangePasswordSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user=self.request.user
+            old_password = serializer.data.get("old_password")
+            new_password1 = serializer.data.get("new_password1")
+            new_password2 = serializer.data.get("new_password2")
+
+            form = PasswordChangeForm(user, {
+                'old_password':old_password,
+                'new_password1':new_password1,
+                'new_password2':new_password2,
+            })
+
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)
+                return Response({'message':'Change Password Successfull'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message':'Change Password Unsuccessfull'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+             return Response({'message':'Change Password Unsuccessfull'}, status=status.HTTP_400_BAD_REQUEST)

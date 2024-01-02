@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
-from customer.views import MyTokenObtainPairView, CustomerUserRegisterView
+from customer.views import ChangePasswordApiView, MyTokenObtainPairView, CustomerUserRegisterView
 from product.views import CategoryViewSet, BrandViewSet, ProductViewSet
 from sitesettings.views import SocialMediaViewSet, SliderViewSet
 from rest_framework_simplejwt.views import (
@@ -32,6 +32,8 @@ urlpatterns = [
 
     path('api/customer/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/customer/create/', CustomerUserRegisterView.as_view(), name='customer-register'),
+    path('api/customer/change-password/', ChangePasswordApiView.as_view(), name='customer-change-password'),
+
 
 
 ]+router.urls
