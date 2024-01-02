@@ -15,6 +15,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import ProductDetail from './screens/ProductDetail';
 import ProfileScreen from './screens/ProfileScreen';
+import WishListScreen from './screens/auth/WishlistScreen';
+import ChangePasswordScreen from './screens/auth/ChangePassword';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +33,8 @@ function App() {
         <Route path="/auth/login" element={<Login/>} /> 
         <Route path="/auth/register" element={<Register/>} /> 
         <Route path="/auth/profile" element={<ProfileScreen/>} /> 
+        <Route path="/auth/wishlist" element={<WishListScreen/>} /> 
+        <Route path="/auth/change-password" element={<ChangePasswordScreen/>} /> 
         <Route path="/shop" element={<ShopScreen/>} /> 
         <Route path="/product/:slug" element={<ProductDetail/>} /> 
       </Routes>

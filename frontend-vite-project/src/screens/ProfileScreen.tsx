@@ -3,6 +3,7 @@ import { logoutAction, userControl } from '../hooks/actions/UserAction';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { useNavigate } from 'react-router';
+import ProfilePart from '../components/ProfilePart';
 
 function ProfileScreen() {
 
@@ -26,10 +27,7 @@ function ProfileScreen() {
   
 
 
-    const handleLogout = ()=>
-    {
-        dispatch(logoutAction());
-    }
+   
 
 
   return (
@@ -50,74 +48,9 @@ function ProfileScreen() {
 
 <div class="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
 
-    <div class="col-span-3">
-
-        <div class="px-4 shadow-lg flex bg-gray-100 items-center rounded-sm">
-          
-            <div class="ml-2">
-
-                <p class="text-gray-500"> Hello....</p>
-                <p class="text-gray-700 font-semibold">Efe Görkem Ümit Youtube</p>
-            </div>
 
 
-        </div>
-
-
-        <div class="mt-6 bg-gray-100 shadow-lg rounded-sm divide-y divide-gray-200 space-y-4 text-gray-600">
-
-            <div class="space-y-1 pl-8">
-                <a href="#" class="relative pt-4   font-medium text-xl hover:text-primary transition block text-primary">
-                    <i class="fa-solid fa-receipt"></i> Manage Account
-                </a>
-
-                <a href="#" class="hover:text-primary transition block" >Change Password</a>
-                <a href="#" class="hover:text-primary transition block">Profile Status</a>
-
-            </div>
-
-            <div class="space-y-1 pl-8">
-                <a href="#" class="relative pt-4   font-medium text-xl hover:text-primary transition block text-primary">
-                    <i class="fa-solid fa-basket-shopping"></i> Manage Shipping
-                </a>
-
-                <a href="#" class="hover:text-primary transition block" >History Shipping</a>
-                <a href="#" class="hover:text-primary transition block">Cancelled Shipping</a>
-
-            </div>
-
-            <div class="space-y-1 pl-8">
-                <a href="#" class="relative pt-4   font-medium text-xl hover:text-primary transition block text-primary">
-                    <i class="fa-solid fa-location-pin"></i> Address
-                </a>
-
-                <a href="#" class="hover:text-primary transition block" >Change Address</a>
-                <a href="#" class="hover:text-primary transition block">Update Address</a>
-
-            </div>
-
-            <div class="space-y-1 pl-8 pt-2 pb-0">
-                <a href="#" class="hover:text-primary transition block text-xl" >     <i class="fa-solid fa-basket-shopping"></i> Card</a>
-            </div>
-            <div class="space-y-1 pl-8 pt-2 pb-0">
-                <a href="#" class="hover:text-primary transition block text-xl items-center justify-center" ><i class="fa-solid fa-heart"></i> Whislist</a>
-            </div>
-
-            <div class="space-y-1 pl-8 pt-2 pb-2">
-                <a  onClick={handleLogout}  class="hover:text-primary transition block text-xl"> <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-            </div>
-
-
-
-        </div>
-
-    
-
-
-        
-
-
-    </div>
+    <ProfilePart></ProfilePart>
 
 
 
