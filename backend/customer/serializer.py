@@ -1,6 +1,8 @@
 from rest_framework import  serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from product.serializer import ProductSerializer
+from .models import Wishlist
 
 class UserRegisterSerialiezer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +28,10 @@ class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password1 = serializers.CharField(required=True)
     new_password2 = serializers.CharField(required=True)
+
+class WishListSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model=Wishlist
+        fields='__all__'
