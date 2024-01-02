@@ -79,3 +79,13 @@ export const userControl = () => async  (dispatch)=>{
         dispatch({type:'USER_INFO_FAIL', payload:error.message || "Error system" })
     }
 };
+
+export const logoutAction = () => async  (dispatch)=>{
+
+    localStorage.removeItem('userInfo')
+    dispatch({type:'USER_INFO_RESET' })
+    dispatch({type:'USER_LOGIN_LOGOUT' })
+    window.location.reload();
+
+
+}

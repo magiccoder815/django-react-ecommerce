@@ -1,5 +1,5 @@
 import { USER_REGISTER_REQUEST, USER_REGISTER_FAIL , USER_REGISTER_SUCCESS ,
-    USER_LOGIN_FAIL, USER_LOGIN_LOGOUT, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_INFO_REQUEST, USER_INFO_SUCCESS, USER_INFO_FAIL
+    USER_LOGIN_FAIL, USER_LOGIN_LOGOUT, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_INFO_REQUEST, USER_INFO_SUCCESS, USER_INFO_FAIL, USER_INFO_RESET
 
 } from "../constans/UserConstans";
 
@@ -91,6 +91,8 @@ export const userReducer = (state = Information, action )=>{
                 loading:false,
                 error:action.payload,
             };
+        case USER_INFO_RESET:
+                return Information
       
         default:
             return state;

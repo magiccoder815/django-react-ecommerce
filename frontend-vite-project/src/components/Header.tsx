@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { getCategories } from '../hooks/actions/ProductAction';
 import { LOC_URL } from '../configUrl';
-import { userControl } from '../hooks/actions/UserAction';
+import { logoutAction, userControl } from '../hooks/actions/UserAction';
 
 
 function Header() {
@@ -31,6 +31,11 @@ function Header() {
 
     const toggleMobileMenu=()=>{
         setMobileMenuVisible(!mobileMenuVisible);
+    }
+
+    const handleLogout = ()=>
+    {
+        dispatch(logoutAction());
     }
 
   return (
@@ -72,12 +77,47 @@ function Header() {
                     </div>
                 </a>
 
-                <a  className="block text-center text-gray-700 hover:text-primary transition relative">
+             
+
+                {UserInfoLoading ? (
+        <p><LoadingSpinner></LoadingSpinner> </p>
+      ) : UserInfoError ? (
+        <p>
+              <Link to='/auth/login'>
+   <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
-                    <div className="text-2xl">
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                </a>
+                        <div className="text-2xl">
+                            <i className="fa-solid fa-user"></i>
+                        </div>
+                    </a>
+                    </Link>
+        </p>
+      ): userInfo ? (
+        <p>
+        <Link to='/auth/profile'>
+<a  className="block text-center text-gray-700 hover:text-primary transition relative">
+                  
+                  <div className="text-2xl">
+                      <i className="fa-solid fa-user"></i>
+                  </div>
+              </a>
+              </Link>
+  </p>
+
+      ):(
+        <p>
+        <Link to='/auth/login'>
+<a  className="block text-center text-gray-700 hover:text-primary transition relative">
+                  
+                  <div className="text-2xl">
+                      <i className="fa-solid fa-user"></i>
+                  </div>
+              </a>
+              </Link>
+  </p>
+      ) }
+
+
                </div>
                
                         
@@ -163,13 +203,20 @@ function Header() {
         <Link to='/auth/login'>
         <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Profile</a>
         </Link>
-        <Link to='/auth/register'>
-        <a className="text-white font-semibold hover:text-gray-200 transition" > <i class="fa-solid fa-right-from-bracket"></i>  Logout</a>
-        </Link>
+       
+        <a onClick={handleLogout} className=" cursor-pointer text-white font-semibold hover:text-gray-200 transition" > <i class="fa-solid fa-right-from-bracket"></i>  Logout</a>
+        
     </div>
 
       ):(
-        <p> user not into</p>
+        <div className="space-x-4">
+                    <Link to='/auth/login'>
+                    <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Login</a>
+                    </Link>
+                    <Link to='/auth/register'>
+                    <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user-plus"></i>  Register</a>
+                    </Link>
+                </div>
       ) }
                     
               
@@ -241,6 +288,7 @@ function Header() {
                             </div>
 
                             <h3 className="text-xl pt-6 pl-4 font-roboto text-gray-700 font-semibold"> Menu</h3>
+                           
                             <div>
 
                               <Link to="/">
@@ -255,12 +303,7 @@ function Header() {
                               <Link to="/contact">
                                 <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-phone"></i> Contact</a>
                                 </Link>  
-                              <Link to="/auth/login">
-                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user"></i> Login</a>
-                                </Link>  
-                              <Link to="/auth/register">
-                                <a  className="block px-4 py-4 font-medium transition hover:bg-primary hover:text-white">   <i className="fa-solid fa-user-plus"></i> Register</a>
-                                </Link>  
+                          
                             </div>
 
                         </div>

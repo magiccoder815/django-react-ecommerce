@@ -9,17 +9,21 @@ import ErrorMessage from '../components/ErrorMessage';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Product from '../components/Product';
 import { Link } from 'react-router-dom';
+import { userControl } from '../hooks/actions/UserAction';
 
 function HomeScreen() {
 
     const dispatch = useDispatch();
     const {categories, error ,loading} =useAppSelector((state)=>state.categories);
     const {products, error:proError ,loading:proLoading} =useAppSelector((state)=>state.products);
+    const {userInfo, error:UserInfoError ,loading:UserInfoLoading} =useAppSelector((state)=>state.user);
 
 
     useEffect(()=>{
         dispatch(getCategories());
         dispatch(getProduct());
+        dispatch(userControl())
+
     },[dispatch]);
 
   
