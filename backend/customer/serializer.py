@@ -13,7 +13,7 @@ class UserRegisterSerialiezer(serializers.ModelSerializer):
 class UserSerialiezer(serializers.ModelSerializer):
     class Meta:
         model= User
-        fields=('id', 'email', 'is_active')
+        fields=('id', 'email', 'is_active', 'first_name', 'last_name')
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):

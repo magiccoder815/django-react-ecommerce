@@ -1,11 +1,20 @@
-import React from 'react'
-import { logoutAction } from '../hooks/actions/UserAction';
+import React, { useEffect } from 'react'
+import { logoutAction, userControl } from '../hooks/actions/UserAction';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
+import { useAppSelector } from '../store';
 
 function ProfilePart() {
 
     const dispatch = useDispatch();
+
+  const {userInfo, error:UserInfoError ,loading:UserInfoLoading} =useAppSelector((state)=>state.user);
+
+  useEffect(()=>{
+    dispatch(userControl())
+
+}, [dispatch]);
 
     const handleLogout = ()=>
     {
@@ -20,7 +29,22 @@ function ProfilePart() {
             <div class="ml-2">
 
                 <p class="text-gray-500"> Hello....</p>
-                <p class="text-gray-700 font-semibold">Efe Görkem Ümit Youtube</p>
+                <p class="text-gray-700 font-semibold">
+                {UserInfoLoading ? (
+        <p><LoadingSpinner></LoadingSpinner> </p>
+      ) : UserInfoError ? (
+        <p>Error</p>
+      ): userInfo ? (
+        <p>{userInfo.first_name}   {userInfo.last_name}</p>
+
+      ):(
+        <p> user not into</p>
+      )
+
+      
+    }
+
+                </p>
             </div>
 
 

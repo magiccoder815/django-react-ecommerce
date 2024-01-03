@@ -63,18 +63,23 @@ function Header() {
                <div className="space-x-4 flex items-center">
                 <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
-                    <span className="absolute -right-2 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 2</span>
-                    <div className="text-2xl">
+                    <span className="absolute  -right-2 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 2</span>
+                    <Link to='/auth/wishlist'>
+                    <div className="cursor-pointer text-2xl">
                         <i className="fa-solid fa-heart"></i>
                     </div>
+                    </Link>
                 </a>
 
                 <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                         
                     <span className="absolute -right-2 -top-1 w-5 h-5 rounded-lg flex items-center justify-center bg-primary text-white text-xs font-bold"> 3</span>
-                    <div className="text-2xl">
+                    <Link to='/cart'>
+
+                    <div className="cursor-pointer text-2xl">
                         <i className="fa-solid fa-cart-shopping"></i>
                     </div>
+                    </Link>
                 </a>
 
              
@@ -200,7 +205,7 @@ function Header() {
         </p>
       ): userInfo ? (
         <div className="space-x-4">
-        <Link to='/auth/login'>
+        <Link to='/auth/profile'>
         <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Profile</a>
         </Link>
        
