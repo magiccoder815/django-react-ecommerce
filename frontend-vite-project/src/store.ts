@@ -3,7 +3,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
 import { ProductDetailReducer, ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
 import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
-import { UserLoginReducer, userReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
+import { UserLoginReducer, userChangePassReducer, userReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
 
 const userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo") || 'null');
 
@@ -19,7 +19,8 @@ const store = configureStore({
     socials:SocialReducer,
     userRegister:userRegisterReducer,
     userLogin:UserLoginReducer,
-    user: userReducer
+    user: userReducer,
+    Cpassword:userChangePassReducer
   },
   preloadedState:{
     userLogin:{userInfo:userInfoFromStorage}
