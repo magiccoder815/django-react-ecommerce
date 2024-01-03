@@ -3,7 +3,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import type { RootState, AppDispatch } from './store';
 import { ProductDetailReducer, ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
 import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
-import { UserLoginReducer, userChangePassReducer, userReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
+import { UserLoginReducer, deleteWishlistReducer, getWishlistReducer, postWishlistReducer, userChangePassReducer, userReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
 
 const userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo") || 'null');
 
@@ -20,7 +20,10 @@ const store = configureStore({
     userRegister:userRegisterReducer,
     userLogin:UserLoginReducer,
     user: userReducer,
-    Cpassword:userChangePassReducer
+    Cpassword:userChangePassReducer,
+    getWish:getWishlistReducer,
+    postWish:postWishlistReducer,
+    deleteWish:deleteWishlistReducer
   },
   preloadedState:{
     userLogin:{userInfo:userInfoFromStorage}

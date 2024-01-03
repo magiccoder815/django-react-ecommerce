@@ -132,3 +132,102 @@ export const userChangePassword = (old_password, new_password1, new_password2) =
         dispatch({type:'USER_CHANGEPASSWORD_FAIL', payload:error.message || "Error system" })
     }
 };
+
+
+
+export const getWishlistAction = () => async  (dispatch, getState)=>{
+    dispatch({type:'WISHLIST_GET_REQUEST'});
+    try{
+
+        const {userInfo} = getState().user;
+        if(userInfo)
+        {
+            const config ={
+                headers:{
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${userInfo.access}`
+                },
+            };
+
+           
+            const response = await axios.get(BASE_URL+"/customer/wishlist/", config);
+            dispatch({type:'WISHLIST_GET_SUCCESS', payload:response.data});
+        }
+        else
+        {
+            dispatch({type:'WISHLIST_GET_FAIL', payload:error.message || "Error system" })
+
+        }
+        
+    }
+    catch(error){
+        dispatch({type:'WISHLIST_GET_FAIL', payload:error.message || "Error system" })
+    }
+};
+
+export const postWishlistAction = (product_id) => async  (dispatch, getState)=>{
+    dispatch({type:'WISHLIST_POST_REQUEST'});
+    try{
+
+        const {userInfo} = getState().user;
+        if(userInfo)
+        {
+            const config ={
+                headers:{
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${userInfo.access}`
+                },
+            };
+
+            const data={
+                product_id
+              
+              }
+
+              
+            const response = await axios.post(BASE_URL+"/customer/wishlist/", data, config);
+            dispatch({type:'WISHLIST_POST_SUCCESST', payload:response.data});
+        }
+        else
+        {
+            dispatch({type:'WISHLIST_POST_FAIL', payload:error.message || "Error system" })
+
+        }
+        
+    }
+    catch(error){
+        dispatch({type:'WISHLIST_POST_FAIL', payload:error.message || "Error system" })
+    }
+};
+
+
+
+export const deleteWishlistAction = (id) => async  (dispatch, getState)=>{
+    dispatch({type:'WISHLIST_DELETE_REQUEST'});
+    try{
+
+        const {userInfo} = getState().user;
+        if(userInfo)
+        {
+            const config ={
+                headers:{
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${userInfo.access}`
+                },
+            };
+
+                         
+            const response = await axios.delete(BASE_URL+`/customer/wishlist/${id}`,  config);
+            dispatch({type:'WISHLIST_DELETE_SUCCESST', payload:response.data});
+        }
+        else
+        {
+            dispatch({type:'WISHLIST_DELETE_FAIL', payload:error.message || "Error system" })
+
+        }
+        
+    }
+    catch(error){
+        dispatch({type:'WISHLIST_DELETE_FAIL', payload:error.message || "Error system" })
+    }
+};
