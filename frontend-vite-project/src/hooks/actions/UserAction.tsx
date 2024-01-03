@@ -91,26 +91,42 @@ export const logoutAction = () => async  (dispatch)=>{
 }
 
 
-export const userChangePassword = (old_password, new_password1, new_password2) => async  (dispatch)=>{
+export const userChangePassword = (old_password, new_password1, new_password2) => async  (dispatch, getState)=>{
     dispatch({type:'USER_CHANGEPASSWORD_REQUEST'});
     try{
 
-        const config ={
-            headers:{
-                'Content-type': 'application/json',
-                'Authorization': `Bearer ${userInfo.access}`
-            },
-        };
+        const {userInfo} = getState().user;
 
-        const data={
-            old_password,
-            new_password1,
-            new_password2,
-        
+        if(userInfo)
+        {
+
+            const config ={
+                headers:{
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${userInfo.access}`
+                },
+            };
+    
+            const data={
+                old_password,
+                new_password1,
+                new_password2,
+            
+            }
+    
+            const response = await axios.post(BASE_URL+"/customer/change-password/",data, config);
+            dispatch({type:'USER_CHANGEPASSWORD_SUCCESS', payload:response.data});
+
+
+
+        }
+        else
+        {
+            dispatch({type:'USER_CHANGEPASSWORD_FAIL', payload:error.message || "Error system" })
+
         }
 
-        const response = await axios.post(BASE_URL+"/customer/change-password/",data, config);
-        dispatch({type:'USER_CHANGEPASSWORD_SUCCESS', payload:response.data});
+        
     }
     catch(error){
         dispatch({type:'USER_CHANGEPASSWORD_FAIL', payload:error.message || "Error system" })
