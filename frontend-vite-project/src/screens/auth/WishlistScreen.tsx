@@ -59,11 +59,9 @@ function WishListScreen() {
 
     <div class="col-span-9  p-5 gap-4 mt-6 lg:mt-1">
 
-        aaa
         {getWish.product && getWish.product.map((productId)=>(
             <p key={productId}>
-                {productId}
-                <Wish></Wish>
+                <Wish productId={productId}></Wish>
             </p>
 
 

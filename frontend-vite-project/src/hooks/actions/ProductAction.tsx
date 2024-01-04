@@ -78,3 +78,24 @@ export const getProductDetail = (url) => async  (dispatch)=>{
 export const resetProductDetail=()=>{
     return{type:PRODUCT_DETAIL_RESET};
 }
+
+
+export const fetchIDProductDetail = (productId) => async  (dispatch)=>{
+ 
+    try{
+        const url= BASE_URL+'/product/'+productId
+        dispatch({type:'PRODUCT_ID_REQUEST'});
+
+        const response = await axios.get(url);
+        const productData = response.data;
+
+        dispatch({type:'PRODUCT_ID_SUCCESS', payload:productData});
+
+        return productData;
+   
+    }
+    catch(error){
+        dispatch({type:'PRODUCT_ID_FAIL', payload:error.message || "Error system" })
+    }
+     
+};
