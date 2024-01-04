@@ -72,15 +72,7 @@ function ProfilePart() {
 
             </div>
 
-            <div class="space-y-1 pl-8">
-                <a href="#" class="relative pt-4   font-medium text-xl hover:text-primary transition block text-primary">
-                    <i class="fa-solid fa-location-pin"></i> Address
-                </a>
-
-                <a href="#" class="hover:text-primary transition block" >Change Address</a>
-                <a href="#" class="hover:text-primary transition block">Update Address</a>
-
-            </div>
+           
 
             <div class="space-y-1 pl-8 pt-2 pb-0">
             <Link to="/cart">
