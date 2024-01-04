@@ -5,6 +5,7 @@ import LoadingSpinner from './LoadingSpinner';
 import ErrorMessage from './ErrorMessage';
 import { CLOUD_URL } from '../configUrl';
 import { Link } from 'react-router-dom';
+import { deleteWishlistAction } from '../hooks/actions/UserAction';
 
 function Wish({productId}) {
 
@@ -38,6 +39,11 @@ function Wish({productId}) {
       
     },[dispatch, productId]);
 
+
+    const handleDelete = () =>{
+        dispatch(deleteWishlistAction(productId))
+    }
+
     if(!productId || loading){
         return <LoadingSpinner></LoadingSpinner>
     }
@@ -50,7 +56,7 @@ function Wish({productId}) {
   return (
     
 <div class="flex items-center mt-3 mb-3 p-4 rounded-lg border-gray-300 flex-wrap md:flex-nowrap bg-gray-100 md:justify-between gap-4">
-    <div class="text-gray-700 hover:text-primary cursor-pointer justify-center items-center">
+    <div onClick={handleDelete} class="text-gray-700 hover:text-primary cursor-pointer justify-center items-center">
         <i class="fa-solid fa-trash"></i>
     </div>
 

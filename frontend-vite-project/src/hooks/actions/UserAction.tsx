@@ -219,6 +219,8 @@ export const deleteWishlistAction = (id) => async  (dispatch, getState)=>{
                          
             const response = await axios.delete(BASE_URL+`/customer/wishlist/${id}`,  config);
             dispatch({type:'WISHLIST_DELETE_SUCCESST', payload:response.data});
+            dispatch(resetWish());
+            dispatch(getWishlistAction());
         }
         else
         {
@@ -231,3 +233,7 @@ export const deleteWishlistAction = (id) => async  (dispatch, getState)=>{
         dispatch({type:'WISHLIST_DELETE_FAIL', payload:error.message || "Error system" })
     }
 };
+
+export const resetWish=()=>{
+   return{type:'WISHLIST_GET_RESET'}
+}
