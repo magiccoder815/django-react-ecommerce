@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../store';
 import { BASE_URL, CLOUD_URL } from '../configUrl';
 import { getProductDetail, resetProductDetail } from '../hooks/actions/ProductAction';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { postWishlistAction } from '../hooks/actions/UserAction';
 
 function ProductDetail() {
 
     const {slug} = useParams();
+    const navigate = useNavigate();
 
 
     const [quantity, setQuantity] = useState(1);
@@ -60,6 +62,15 @@ function ProductDetail() {
 
 
     }, [productDetail])
+
+    
+    const handleWish = ()=>{
+
+        dispatch(postWishlistAction(productDetail.id))
+        navigate("/auth/wishlist");
+       
+
+    };
 
 
 
@@ -275,7 +286,7 @@ function ProductDetail() {
                     Add to Cart
                     </a>
                    
-                    <a href="" class="bg-second border border-gray-950 text-white px-10 py-4 
+                    <a onClick={handleWish} class="bg-second border border-gray-950 text-white px-10 py-4 
                     hover:bg-primary hover:text-white transition flex items-center font-medium rounded-lg uppercase">
                     <span class="mr-3"><i class="fa-solid fa-heart"></i> 
                     </span>   Whishlist
