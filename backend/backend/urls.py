@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework import routers
 from customer.views import ChangePasswordApiView, MyTokenObtainPairView, CustomerUserRegisterView, WishlistApiView
-from product.views import CategoryViewSet, BrandViewSet, ProductViewSet
+from product.views import CategoryViewSet, BrandViewSet, ProductByIdView, ProductViewSet
 from sitesettings.views import SocialMediaViewSet, SliderViewSet
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -30,10 +30,12 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
+    path('api/product/<int:id>/', ProductByIdView.as_view(), name='product-by-id'),
+
+
     path('api/customer/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/customer/create/', CustomerUserRegisterView.as_view(), name='customer-register'),
     path('api/customer/change-password/', ChangePasswordApiView.as_view(), name='customer-change-password'),
-
     path('api/customer/wishlist/', WishlistApiView.as_view(), name='wishlist-user'),
     path('api/customer/wishlist/<int:product_id>/', WishlistApiView.as_view(), name='wishlist-user-delete'),
 

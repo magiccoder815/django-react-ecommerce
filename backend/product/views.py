@@ -6,7 +6,7 @@ from .models import Category, Brand , Product
 from rest_framework.response import  Response
 from .serializer import CategorySerializer, BrandSerializer, ProductSerializer
 from .schema import category_doc
-
+from rest_framework.generics import RetrieveAPIView
 
 class CategoryViewSet(viewsets.ModelViewSet):
    
@@ -96,4 +96,17 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = ProductSerializer(product)
         return Response (serializer.data)
         
+
+class ProductByIdView(RetrieveAPIView):
+    serializer_class =ProductSerializer
+    lookup_field='id'
+    #permission_classes=[]
+
+    def get_queryset(self):
+        return Product.objects.all()
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
