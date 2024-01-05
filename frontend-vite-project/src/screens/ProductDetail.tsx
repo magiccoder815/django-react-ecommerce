@@ -7,6 +7,7 @@ import { getProductDetail, resetProductDetail } from '../hooks/actions/ProductAc
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { postWishlistAction } from '../hooks/actions/UserAction';
+import { AddToCart } from '../hooks/actions/CartAction';
 
 function ProductDetail() {
 
@@ -71,6 +72,29 @@ function ProductDetail() {
        
 
     };
+
+    const [selectedSize, setSelectedSize] = useState('');
+
+    const handleAddToCart = ()=>{
+        if(!selectedSize){
+
+            return;
+        }
+        const item = {
+            id:productDetail.id,
+            name:productDetail.title,
+            quantity:quantity,
+            image:productDetail.image,
+            price:productDetail.price,
+            size:selectedSize,
+
+
+        }
+
+        dispatch(AddToCart(item));
+
+
+    }
 
 
 
@@ -219,7 +243,12 @@ function ProductDetail() {
                    
                     <div class="size-selector">
         
-                        <input type="radio" name="size" class="hidden" id="size-xs"/>
+                        <input type="radio" 
+                        name="size" 
+                        class="hidden"
+                        checked={selectedSize==='XS'}
+                        onChange={()=>setSelectedSize('XS')}
+                         id="size-xs"/>
                         <label for="size-xs" class="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
                         items-center justify-center cursor-pointer shadow-sm text-gray-900" >XS</label>
         
@@ -227,7 +256,10 @@ function ProductDetail() {
         
                     <div class="size-selector">
         
-                        <input type="radio" name="size" class="hidden" id="size-s"/>
+                        <input type="radio" name="size" class="hidden"
+                         checked={selectedSize==='S'}
+                         onChange={()=>setSelectedSize('S')}
+                         id="size-s"/>
                         <label for="size-s" class="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
                         items-center justify-center cursor-pointer shadow-sm text-gray-900" >S</label>
         
@@ -235,7 +267,10 @@ function ProductDetail() {
         
                     <div class="size-selector">
         
-                        <input type="radio" name="size" class="hidden" id="size-m"/>
+                        <input type="radio" name="size" 
+                         checked={selectedSize==='M'}
+                         onChange={()=>setSelectedSize('M')}
+                        class="hidden" id="size-m"/>
                         <label for="size-m" class="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
                         items-center justify-center cursor-pointer shadow-sm text-gray-900" >M</label>
         
@@ -243,7 +278,10 @@ function ProductDetail() {
         
                     <div class="size-selector">
         
-                        <input type="radio" name="size" class="hidden" id="size-l"/>
+                        <input type="radio" name="size" 
+                         checked={selectedSize==='L'}
+                         onChange={()=>setSelectedSize('L')}
+                         class="hidden" id="size-l"/>
                         <label for="size-l" class="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
                         items-center justify-center cursor-pointer shadow-sm text-gray-900" >L</label>
         
@@ -252,7 +290,10 @@ function ProductDetail() {
         
                     <div class="size-selector">
         
-                        <input type="radio" name="size" class="hidden" id="size-xl"/>
+                        <input type="radio" name="size" 
+                         checked={selectedSize==='XL'}
+                         onChange={()=>setSelectedSize('XL')}
+                         class="hidden" id="size-xl"/>
                         <label for="size-xl" class="text-xs border border-gray-200  rounded-sm h-7 w-7 flex 
                         items-center justify-center cursor-pointer shadow-sm text-gray-900" >XL</label>
         
@@ -278,7 +319,7 @@ function ProductDetail() {
         
                 </div>
         
-                <div class="flex gap-3 border-b border-gray-200 pb-5 mt-6">
+                <div onClick={handleAddToCart} class="flex gap-3 border-b border-gray-200 pb-5 mt-6">
                     <a href="#" class="bg-primary border border-primary text-white px-10 py-4 
                     hover:bg-transparent hover:text-primary transition flex items-center font-medium rounded-lg uppercase">
                     <span class="mr-3"><i class="fa-solid fa-cart-shopping"></i> 
