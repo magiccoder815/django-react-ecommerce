@@ -14,13 +14,14 @@ function WishListScreen() {
 
     const {userLogin} =useAppSelector((state)=>state.userLogin);
     const {getWish, error ,loading} =useAppSelector((state)=>state.getWish);
+    const {userInfo, error:UserInfoError ,loading:UserInfoLoading} =useAppSelector((state)=>state.user);
 
     useEffect(()=>{
-        if(!userLogin)
+        if(!userInfo)
         {
             navigate('/')
         }
-    }, [userLogin, navigate])
+    }, [userInfo, navigate])
     
     useEffect(()=>{
         dispatch(userControl())

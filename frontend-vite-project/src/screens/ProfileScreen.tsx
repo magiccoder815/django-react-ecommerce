@@ -14,11 +14,11 @@ function ProfileScreen() {
     const {userLogin, error ,loading} =useAppSelector((state)=>state.userLogin);
 
     useEffect(()=>{
-        if(!userLogin)
+        if(!userInfo)
         {
             navigate('/')
         }
-    }, [userLogin, navigate])
+    }, [userInfo, navigate])
     
     useEffect(()=>{
         dispatch(userControl())
