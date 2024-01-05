@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { postWishlistAction } from '../hooks/actions/UserAction';
 import { AddToCart } from '../hooks/actions/CartAction';
+import ErrorMessage from '../components/ErrorMessage';
+import SuccessMessage from '../components/SuccessMesage';
 
 function ProductDetail() {
 
@@ -74,9 +76,13 @@ function ProductDetail() {
     };
 
     const [selectedSize, setSelectedSize] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
     const handleAddToCart = ()=>{
         if(!selectedSize){
+            setErrorMessage(" Size Required")
+            setTimeout(()=>setErrorMessage(null),1000)
 
             return;
         }
@@ -92,6 +98,9 @@ function ProductDetail() {
         }
 
         dispatch(AddToCart(item));
+
+        setSuccessMessage('Cart Add')
+        setTimeout(()=>setSuccessMessage(null),2000)
 
 
     }
@@ -235,6 +244,10 @@ function ProductDetail() {
                     <span class="text-sm line-through " > ${productDetail.price} </span>
         
                 </div>
+
+                {errorMessage && <ErrorMessage errorMessage={errorMessage}></ErrorMessage>}
+                {successMessage &&<SuccessMessage SuccessMessage={successMessage} ></SuccessMessage>}
+
         
                 <div class="pt-1">
                     <h3 class="text-xl text-gray-800 uppercase mb-4 mt-3 font-medium">Size</h3>
