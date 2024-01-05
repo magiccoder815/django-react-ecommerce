@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../hooks/actions/CartAction';
 
 function CartScreen() {
+    const dispatch = useDispatch();
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleDecrement=()=>{
+        if(quantity > 1 ) setQuantity(quantity-1);
+    };
+    const handleIncrement=()=>{
+       setQuantity(quantity+1);
+    };
+
+    const handleClearCart = ()=>{
+
+        dispatch(clearCart())
+    }
+
+
   return (
     <div>
 
@@ -49,9 +68,9 @@ function CartScreen() {
                         </div>
 
                         <div class="flex border border-gray-500 text-gray-600 divide-x divide-gray-500 w-max">
-                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onclick="decr()" > - </div>
-                            <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> 1 </div>
-                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer" onclick="incr()"> + </div>
+                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={handleDecrement} > - </div>
+                            <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> {quantity} </div>
+                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={handleIncrement}> + </div>
             
                         </div>
 
@@ -105,18 +124,18 @@ function CartScreen() {
                 <p>$950</p>
             </div>
 
-            <div class="flex justify-between ml-2  mr-2 font-medium">
-             <input type="text" class="pl-4 w-full border border-r-0 border-primary py-2 px-3 rounded-lg
-              focus:ring-primary focus:border-primary text-sm"/>
-                <button type="submit" class="bg-primary border border-primary text-white px-5 font-medium rounded-lg">Apply</button>
-            </div>
-
-          
+         
+           
 
 
 
 
         </div>
+        <a onClick={handleClearCart} class="bg-gray-600 border text-center cursor-pointer  text-white px-5 py-4 mt-6 block font-medium rounded-lg w-full">
+        <i class="fa-solid fa-trash"></i> Remove Cart
+                        </a>
+                        
+
         <a href="#" class="bg-primary border text-center border-primary text-white px-5 py-4 mt-6 block font-medium rounded-lg w-full">
             Process to checkout
                         </a>
