@@ -4,6 +4,7 @@ import type { RootState, AppDispatch } from './store';
 import { ProductDetailReducer, ProductIdReducer, ProductReducer, SearchProductReducer, TopProductReducer, brandReducer, categoryReducer } from './hooks/reducers/ProductReducer';
 import { SocialReducer, sliderReducer } from './hooks/reducers/SettingsReducer';
 import { UserLoginReducer, deleteWishlistReducer, getWishlistReducer, postWishlistReducer, userChangePassReducer, userReducer, userRegisterReducer } from './hooks/reducers/UserReducer';
+import { addRessReducer, cartReducer, loadState, saveState } from './hooks/reducers/CartReducer';
 
 const userInfoFromStorage = JSON.parse(localStorage.getItem("userInfo") || 'null');
 
@@ -24,12 +25,22 @@ const store = configureStore({
     getWish:getWishlistReducer,
     postWish:postWishlistReducer,
     deleteWish:deleteWishlistReducer,
-    idProduct: ProductIdReducer
+    idProduct: ProductIdReducer,
+    cart:cartReducer,
+    addresses:addRessReducer,
   },
   preloadedState:{
-    userLogin:{userInfo:userInfoFromStorage}
+    userLogin:{userInfo:userInfoFromStorage},
+    cart:loadState('cart'),
+    addresses: loadState('addresses'),
+
   }
 });
+
+store.subscribe(()=>{
+  saveState(store.getState().cart, 'cart');
+  saveState(store.getState().addresses, 'addresses');
+})
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -122,3 +122,5 @@ const saveState =(state, key)=>{
 
     }
 }
+
+export {cartReducer, addRessReducer, loadState, saveState};
