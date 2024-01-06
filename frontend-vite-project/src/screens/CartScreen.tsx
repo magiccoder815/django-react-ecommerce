@@ -1,22 +1,36 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { clearCart } from '../hooks/actions/CartAction';
+import { clearCart, removeFromCart, updateQuantity } from '../hooks/actions/CartAction';
+import { useAppSelector } from '../store';
+import { CLOUD_URL } from '../configUrl';
 
 function CartScreen() {
     const dispatch = useDispatch();
 
     const [quantity, setQuantity] = useState(1);
+    const {cart} =useAppSelector((state)=>state.cart);
 
-    const handleDecrement=()=>{
-        if(quantity > 1 ) setQuantity(quantity-1);
+
+    const handleDecrement=(itemId)=>{
+        const updatedQ = (cart.find((item)=>item.id === itemId)?.quantity) - 1;
+        if(updatedQ>=1){
+            dispatch(updateQuantity(itemId, updatedQ))
+        }
+
+
     };
-    const handleIncrement=()=>{
-       setQuantity(quantity+1);
+    const handleIncrement=(itemId)=>{
+        const updatedQ = (cart.find((item)=>item.id === itemId)?.quantity || 0) +1;
+        dispatch(updateQuantity(itemId, updatedQ))
     };
 
     const handleClearCart = ()=>{
 
         dispatch(clearCart())
+    }
+
+    const handleRemoveFromCart = (itemId)=>{
+        dispatch(removeFromCart(itemId))
     }
 
 
@@ -51,35 +65,40 @@ function CartScreen() {
 
         </div>
 
+        {cart.map((item)=>(
+
+
+     
+
                 <div class="space y-2">
 
                     <div class="flex items-center p-6 bg-stone-200 md:justify-between gap-4 md:gap-6 border border-gray-800 rounded-lg flex-wrap md:flex-nowrap">
 
                         <div class="w-32 flex-shrink-0">
-                            <img src="img/product/watch-1.png" class="w-full"/>
+                            <img src={CLOUD_URL+ item.image} class="w-full"/>
                         </div>
 
                         <div class="md:w-1/3 w-full">
-                            <h2>Watch one</h2>
-                            <p>$65</p>
-                            <p>Size : L</p>
+                            <h2>{item.name}</h2>
+                            <p>${item.price}</p>
+                            <p>Size : {item.size}</p>
                          
 
                         </div>
 
                         <div class="flex border border-gray-500 text-gray-600 divide-x divide-gray-500 w-max">
-                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={handleDecrement} > - </div>
-                            <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> {quantity} </div>
-                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={handleIncrement}> + </div>
+                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={()=> handleDecrement(item.id)} > - </div>
+                            <div class="h-7 w-7 text-2xl flex items-center justify-center " id="quantity"> {item.quantity} </div>
+                            <div class="h-7 w-7 text-xl flex items-center justify-center cursor-pointer"  onClick={()=> handleIncrement(item.id)}> + </div>
             
                         </div>
 
                         <div class="ml-auto md:ml-0">
-                            <p>$350</p>
+                            <p>${item.quantity * item.price}</p>
 
 
                         </div>
-                        <div class="text-second hover:text-primary cursor-pointer ">
+                        <div onClick={() =>handleRemoveFromCart(item.id)} class="text-second hover:text-primary cursor-pointer ">
                             <i class="fa-solid fa-trash"></i>
                         </div>
 
@@ -91,7 +110,7 @@ function CartScreen() {
 
                 </div>
 
-       
+))}
 
 
 
