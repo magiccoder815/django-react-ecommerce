@@ -1,6 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAppSelector } from '../store';
 
 function CartStep2() {
+
+    const {cart} =useAppSelector((state)=>state.cart);
+
+    const delivery = ()=>{
+        if(cart.length>0){ return 50; }
+        else{return 0;}
+    }
+
+    const tax = ()=>{
+        if(cart.length>0){ return 20; }
+        else{return 0;}
+    }
+    const calculateSubTotal =()=>{
+        return cart.reduce((total,item) =>total + item.quantity*item.price,0 );
+    }
+
+    const  calculateTotal =()=>{
+        return calculateSubTotal()+ tax() + delivery()
+    }
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
+
   return (
     <div>
 
@@ -36,10 +60,7 @@ function CartStep2() {
 
                     </div>
 
-                    <div>
-                        <label class="text-gray-600 mb-3 block"> Email <span class="text-primary" > * </span></label>
-                        <input type="text" class="input-box" placeholder="name"/>
-                    </div>
+                
 
                     <div>
                         <label class="text-gray-600 mb-3 block"> Phone <span class="text-primary" > * </span></label>
@@ -63,10 +84,7 @@ function CartStep2() {
                         <input type="text" class="input-box" placeholder="Phone"/>
                     </div>
 
-                    <div>
-                        <label class="text-gray-600 mb-3 block"> Posta Code <span class="text-primary" > * </span></label>
-                        <input type="text" class="input-box" placeholder="Phone"/>
-                    </div>
+               
 
                     
 
@@ -84,47 +102,56 @@ function CartStep2() {
     </div>
 
     <div class="lg:col-span-4 border border-gray-600 bg-gray-300 rounded-lg px-4">
+
+        <div>
         <h3 class="text-lg font-medium mb-10 mt-2">Checkout Review </h3>
 
         <div class="space-y-7 mb-7">
 
-            <div class="flex justify-between">
-                <div>
-                    <h5 class="font-medium uppercase">COMPUTER TWO</h5>
-
-                </div>
-                    <p class="text-sm"> 3</p>
-                    <p class="font-medium">$300</p>
-                
-            </div>
+        {cart.map((item)=>(
 
             <div class="flex justify-between">
                 <div>
-                    <h5 class="font-medium uppercase">COMPUTER Three</h5>
+                    <h5 class="font-medium uppercase">{item.name}</h5>
 
                 </div>
-                    <p class="text-sm"> 3</p>
-                    <p class="font-medium">$300</p>
+                    <p class="text-sm"> {item.quantity}</p>
+                    <p class="font-medium">${item.price}</p>
                 
             </div>
+
+))}
+          
 
         </div>
         <div class="flex justify-between">
            <h4 class="uppercase font-medium">subtotal</h4>
-           <p class="uppercase font-medium">$900</p> 
+           <p class="uppercase font-medium">${calculateSubTotal()}</p> 
         </div>
 
         <div class="flex justify-between">
             <h4 class="uppercase font-medium">Shipping</h4>
-            <p class="uppercase font-medium">Free</p> 
+            <p class="uppercase font-medium">${delivery()+tax()}</p> 
          </div>
 
          <div class="flex justify-between">
             <h4 class="uppercase font-medium">Total</h4>
-            <p class="uppercase font-medium">$900</p> 
+            <p class="uppercase font-medium">${calculateTotal()}</p> 
          </div>
 
-         <div class="flex items-center justify-between mt-6">
+
+         <div class="flex mt-10 justify-between ml-2  mr-2 font-medium">
+                <p className='text-2xl'> <i class="fa-solid fa-credit-card"></i> Cart</p>
+                <p className='text-2xl'><input type='radio' /></p>
+            </div>
+
+            <div class="flex justify-between ml-2  mr-2 font-medium">
+                <p className='text-2xl'> <i class="fa-solid fa-money-bill"></i> Cash</p>
+                <p className='text-2xl'><input type='radio'  /></p>
+            </div>
+
+
+         <div class=" flex items-center justify-between mt-32">
 
             <div class="flex items-center">
                 <input type="checkbox" class="text-primary focus:ring-0 rounded-xl cursor-pointer"/>
@@ -133,6 +160,8 @@ function CartStep2() {
             </div>
         </div>
 
+        
+
         <div class="mt-4">
             <button type="submit" class="block mb-4 w-full py-2 text-center text-white bg-primary border
              border-primary rounded-xl uppercase hover:bg-transparent hover:text-primary transition ">CHECKOUT</button>
@@ -140,7 +169,9 @@ function CartStep2() {
 
         </div>
 
-        
+        </div>
+
+      
 
         
 
