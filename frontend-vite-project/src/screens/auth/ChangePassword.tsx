@@ -18,6 +18,7 @@ function ChangePasswordScreen() {
     const {Cpassword, error ,loading} =useAppSelector((state)=>state.userRegister);
     const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const {userInfo} =useAppSelector((state)=>state.user);
 
 
     const [oldpassword, setoldpassword] = useState('');
@@ -27,11 +28,11 @@ function ChangePasswordScreen() {
 
 
     useEffect(()=>{
-        if(!userLogin)
+        if(!userInfo)
         {
-            navigate('/')
+            navigate('/auth/login')
         }
-    }, [userLogin, navigate])
+    }, [userInfo, navigate])
     
     useEffect(()=>{
         dispatch(userControl())

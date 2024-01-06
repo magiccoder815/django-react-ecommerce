@@ -19,7 +19,7 @@ function WishListScreen() {
     useEffect(()=>{
         if(!userInfo)
         {
-            navigate('/')
+            navigate('/auth/login')
         }
     }, [userInfo, navigate])
     
