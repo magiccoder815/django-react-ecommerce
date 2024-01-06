@@ -3,9 +3,12 @@ import { useDispatch } from 'react-redux';
 import { clearCart, removeFromCart, updateQuantity } from '../hooks/actions/CartAction';
 import { useAppSelector } from '../store';
 import { CLOUD_URL } from '../configUrl';
+import { useNavigate } from 'react-router';
+import ErrorMessage from '../components/ErrorMessage';
 
 function CartScreen() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
     const {cart} =useAppSelector((state)=>state.cart);
@@ -48,6 +51,27 @@ function CartScreen() {
 
     const  calculateTotal =()=>{
         return calculateSubTotal()+ tax() + delivery()
+    }
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
+
+    const handleSteptwo  =()=>{
+        if(cart.length>0)
+        { 
+            navigate('/cart/step2')
+        }
+
+        else
+        {
+
+            setErrorMessage(" Cart is empty ")
+            setTimeout(()=>setErrorMessage(null),6000)
+
+            return;
+           
+        }
+
     }
 
 
@@ -175,11 +199,13 @@ function CartScreen() {
                         </a>
                         
 
-        <a href="#" class="bg-primary border text-center border-primary text-white px-5 py-4 mt-6 block font-medium rounded-lg w-full">
+        <a onClick={handleSteptwo} class="bg-primary border text-center border-primary text-white px-5 py-4 mt-6 block font-medium rounded-lg w-full">
         <i class="fa-solid fa-arrow-right"></i>   Checkout
                         </a>
                         
 
+
+                        {errorMessage && <ErrorMessage errorMessage={errorMessage}></ErrorMessage>}
 
       
 

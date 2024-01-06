@@ -18,6 +18,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import WishListScreen from './screens/auth/WishlistScreen';
 import ChangePasswordScreen from './screens/auth/ChangePassword';
 import CartScreen from './screens/CartScreen';
+import CartStep2 from './screens/CartStep2';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +39,7 @@ function App() {
         <Route path="/auth/change-password" element={<ChangePasswordScreen/>} /> 
         <Route path="/shop" element={<ShopScreen/>} /> 
         <Route path="/cart" element={<CartScreen/>} /> 
+        <Route path="/cart/step2" element={<CartStep2/>} /> 
         <Route path="/product/:slug" element={<ProductDetail/>} /> 
       </Routes>
       <Footer/>

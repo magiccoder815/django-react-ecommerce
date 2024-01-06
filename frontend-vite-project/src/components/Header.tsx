@@ -103,7 +103,7 @@ function Header() {
         </p>
       ): userInfo ? (
         <p>
-        <Link to='/auth/profile'>
+        <Link to='/auth/wishlist'>
 <a  className="block text-center text-gray-700 hover:text-primary transition relative">
                   
                   <div className="text-2xl">
@@ -209,7 +209,7 @@ function Header() {
         </p>
       ): userInfo ? (
         <div className="space-x-4">
-        <Link to='/auth/profile'>
+        <Link to='/auth/wishlist'>
         <a className="text-white font-semibold hover:text-gray-200 transition" > <i className="fa-solid fa-user"></i> Profile</a>
         </Link>
        
