@@ -33,6 +33,26 @@ function CartScreen() {
         dispatch(removeFromCart(itemId))
     }
 
+    const delivery = ()=>{
+        if(cart.length>0){ return 50; }
+        else{return 0;}
+    }
+
+    const tax = ()=>{
+        if(cart.length>0){ return 20; }
+        else{return 0;}
+    }
+    const calculateSubTotal =()=>{
+        return cart.reduce((total,item) =>total + item.quantity*item.price,0 );
+    }
+
+    const  calculateTotal =()=>{
+        return calculateSubTotal()+ tax() + delivery()
+    }
+
+
+    
+
 
   return (
     <div>
@@ -125,22 +145,22 @@ function CartScreen() {
 
             <div class="flex justify-between ml-2  mr-2 font-medium">
                 <p>Subtotal</p>
-                <p>$250</p>
+                <p>${calculateSubTotal()}</p>
             </div>
 
             <div class="flex justify-between ml-2  mr-2 font-medium">
                 <p>Delivery</p>
-                <p>$50</p>
+                <p>${delivery()}</p>
             </div>
 
             <div class="flex justify-between ml-2 mr-2 font-medium">
                 <p>Tax</p>
-                <p>$50</p>
+                <p>${tax()}</p>
             </div>
 
             <div class="flex justify-between ml-2  mr-2 font-medium">
                 <p>Total</p>
-                <p>$950</p>
+                <p>${calculateTotal()}</p>
             </div>
 
          
@@ -156,7 +176,7 @@ function CartScreen() {
                         
 
         <a href="#" class="bg-primary border text-center border-primary text-white px-5 py-4 mt-6 block font-medium rounded-lg w-full">
-            Process to checkout
+        <i class="fa-solid fa-arrow-right"></i>   Checkout
                         </a>
                         
 
