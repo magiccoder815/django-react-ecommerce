@@ -88,7 +88,7 @@ const addRessReducer = (state=addressInitalState, action) =>{
                 return state;
             }
         case REMOVE_ADDRESS:
-            const UpdatedAddressesRemove =  state.addresses.filter(address =>address.id !==action.payload);
+            const UpdatedAddressesRemove =  state.addresses.addresses.filter(address =>address.id !==action.payload);
             saveState({addresses: UpdatedAddressesRemove}, 'addresses');
             return{
                 ...state,
