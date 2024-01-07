@@ -77,18 +77,18 @@ const addRessReducer = (state=addressInitalState, action) =>{
     switch (action.type){
         case ADD_ADDRESS:
             if(state.addresses.length ===0){
-                const updatedAddressAdd = [...state.addresses, action.payload];
-                saveState({addresses:updatedAddressAdd}, 'addresses');
-                return{
-                    ...state,
-                    addresses:updatedAddressAdd
-                }
+               const updatedAddressesAdd = { addresses: [...state.addresses, action.payload] };
+                saveState(updatedAddressesAdd, 'addresses'); // saveState'ı gerekirse güncelleyin
+                return {
+                  ...state,
+                  addresses: updatedAddressesAdd,
+                };
             }
             else{
                 return state;
             }
         case REMOVE_ADDRESS:
-            const UpdatedAddressesRemove = state.addresses.filter(address =>address.id !==action.payload);
+            const UpdatedAddressesRemove =  state.addresses.filter(address =>address.id !==action.payload);
             saveState({addresses: UpdatedAddressesRemove}, 'addresses');
             return{
                 ...state,

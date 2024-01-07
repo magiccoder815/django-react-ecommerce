@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useAppSelector } from '../store';
 import { useDispatch } from 'react-redux';
-import { addAddress } from '../hooks/actions/CartAction';
+import { addAddress, removeAddress } from '../hooks/actions/CartAction';
 
 function CartStep2() {
 
     const {cart} =useAppSelector((state)=>state.cart);
+    const {addresses} =useAppSelector((state)=>state.addresses);
 
     const delivery = ()=>{
         if(cart.length>0){ return 50; }
@@ -45,8 +46,12 @@ function CartStep2() {
     }
 
     const handleSaveAddress=()=>{
-        console.log(userDetails);
         dispatch(addAddress(userDetails))
+    }
+
+    const handleClearCart=(addressId)=>{
+        console.log("a")
+        dispatch(removeAddress(addressId))
     }
 
 
@@ -178,6 +183,26 @@ function CartStep2() {
             <div class="flex justify-between ml-2  mr-2 font-medium">
                 <p className='text-2xl'> <i class="fa-solid fa-money-bill"></i> Cash</p>
                 <p className='text-2xl'><input type='radio' name="pay"  /></p>
+            </div>
+
+
+            <div  class=" flex items-center justify-between mt-6">
+                {addresses.addresses && addresses.addresses.map((adres)=>(
+                    <div key={adres.id}>
+                      <div>{adres.name}  {adres.surname} </div>  
+                      <div>{adres.phone}   </div>  
+                      <div> {adres.city}  {adres.country}  {adres.street}</div> 
+                      <div>{adres.companyName}   </div>  
+
+                    <div  className='cursor-pointer text-primary'> 
+                    <i  onClick={()=>handleClearCart(adres.id)} class="fa-solid fa-trash"></i>
+                    </div>
+                      
+
+                    </div>
+
+
+                ))}
             </div>
 
 
