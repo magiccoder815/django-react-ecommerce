@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useAppSelector } from '../store';
+import { useDispatch } from 'react-redux';
+import { addAddress } from '../hooks/actions/CartAction';
 
 function CartStep2() {
 
@@ -23,6 +25,29 @@ function CartStep2() {
     }
 
     const [errorMessage, setErrorMessage] = useState(null);
+    const dispatch = useDispatch();
+
+    const [userDetails, setUserDetails] =useState({
+        name:'',
+        surname:'',
+        phone:'',
+        city:'',
+        country:'',
+        street:'',
+        companyName:'',
+
+
+    })
+
+    const handleChange = (e) =>{
+        const {name, value} = e.target;
+        setUserDetails((prevDetails)=>({...prevDetails, [name]:value}));
+    }
+
+    const handleSaveAddress=()=>{
+        console.log(userDetails);
+        dispatch(addAddress(userDetails))
+    }
 
 
   return (
@@ -44,18 +69,17 @@ function CartStep2() {
 <div class="container lg:grid grid-cols-12 gap-6 items-start pb-16 pt-4">
 
     <div class="lg:col-span-8 border border-gray-600 bg-gray-300 rounded-lg px-4">
-        <form>
             <h3 class="text-lg font-medium mb-10 mt-2">User Details Form</h3>
 
             <div class="space-y-7 mb-7">
                     <div class="grid sm:grid-cols-2 gap-4 mt-4">
                         <div>
                             <label class="text-gray-600 mb-3 block"> Name <span class="text-primary" > * </span></label>
-                            <input type="text" class="input-box" placeholder="name"/>
+                            <input type="text" name="name" value={userDetails.name} onChange={handleChange} class="input-box" placeholder="name"/>
                         </div>
                         <div>
                             <label class="text-gray-600 mb-3 block"> Surname <span class="text-primary" > * </span></label>
-                            <input type="text" class="input-box" placeholder="Surname"/>
+                            <input type="text" name="surname" value={userDetails.surname} onChange={handleChange} class="input-box" placeholder="Surname"/>
                         </div>
 
                     </div>
@@ -64,24 +88,24 @@ function CartStep2() {
 
                     <div>
                         <label class="text-gray-600 mb-3 block"> Phone <span class="text-primary" > * </span></label>
-                        <input type="text" class="input-box" placeholder="Phone"/>
+                        <input type="text" name="phone" value={userDetails.phone} onChange={handleChange} class="input-box" placeholder="Phone"/>
                     </div>
 
                     <div class="grid sm:grid-cols-2 gap-4 mt-4">
                         <div>
                             <label class="text-gray-600 mb-3 block"> City <span class="text-primary" > * </span></label>
-                            <input type="text" class="input-box" placeholder="City"/>
+                            <input type="text" name="city" value={userDetails.city} onChange={handleChange} class="input-box" placeholder="City"/>
                         </div>
                         <div>
                             <label class="text-gray-600 mb-3 block"> Country <span class="text-primary" > * </span></label>
-                            <input type="text" class="input-box" placeholder="Country"/>
+                            <input type="text" name="country" value={userDetails.country} onChange={handleChange} class="input-box" placeholder="Country"/>
                         </div>
 
                     </div>
 
                     <div>
                         <label class="text-gray-600 mb-3 block"> Street <span class="text-primary" > * </span></label>
-                        <input type="text" class="input-box" placeholder="Phone"/>
+                        <input type="text" name="street" value={userDetails.street} onChange={handleChange}  class="input-box" placeholder="Phone"/>
                     </div>
 
                
@@ -90,15 +114,21 @@ function CartStep2() {
 
                     <div>
                         <label class="text-gray-600 mb-3 block"> Company Name </label>
-                        <input type="text" class="input-box" placeholder="name"/>
+                        <input type="text" name="companyName" value={userDetails.companyName} onChange={handleChange} class="input-box" placeholder="name"/>
                     </div>
+
+                    <div class="mt-4">
+            <button onClick={handleSaveAddress} class="block mb-4 w-full py-2 text-center text-white bg-second border
+             border-second rounded-xl uppercase hover:bg-transparent hover:text-second transition ">SAVE ADDRESS</button>
+
+
+        </div>
 
                  
             
              </div>
 
 
-        </form>
     </div>
 
     <div class="lg:col-span-4 border border-gray-600 bg-gray-300 rounded-lg px-4">
@@ -142,12 +172,12 @@ function CartStep2() {
 
          <div class="flex mt-10 justify-between ml-2  mr-2 font-medium">
                 <p className='text-2xl'> <i class="fa-solid fa-credit-card"></i> Cart</p>
-                <p className='text-2xl'><input type='radio' /></p>
+                <p className='text-2xl'><input type='radio' name="pay"  /></p>
             </div>
 
             <div class="flex justify-between ml-2  mr-2 font-medium">
                 <p className='text-2xl'> <i class="fa-solid fa-money-bill"></i> Cash</p>
-                <p className='text-2xl'><input type='radio'  /></p>
+                <p className='text-2xl'><input type='radio' name="pay"  /></p>
             </div>
 
 

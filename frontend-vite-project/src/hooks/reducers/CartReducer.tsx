@@ -77,7 +77,7 @@ const addRessReducer = (state=addressInitalState, action) =>{
     switch (action.type){
         case ADD_ADDRESS:
             if(state.addresses.length ===0){
-                const updatedAddressAdd = [...state, action.payload];
+                const updatedAddressAdd = [...state.addresses, action.payload];
                 saveState({addresses:updatedAddressAdd}, 'addresses');
                 return{
                     ...state,
