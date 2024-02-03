@@ -1,5 +1,5 @@
 <a href="https://youtu.be/89NvjCo83Rs" rel="nofollow">
-<img src="https://i9.ytimg.com/vi/89NvjCo83Rs/sddefault.jpg?v=659ac1bf&sqp=CMjA860G&rs=AOn4CLBEOD7oeuCsaxxAgJ_J9qMmbrQ92w" style="max-width: 10%;">
+<img src="https://efegorkemumit.github.io/assets/img/course/react-django.png" style="max-width: 10%;">
 </a>
 
 <div></div>
